@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Energy House</string>
+    <string name="EnergyButton">Energy</string>
+    <string name="RecycleButton">Recycling</string>
+    <string name="Transportation">Transportation</string>
+    <string name="EnergyTitle">Energy Summary</string>
+    <string name="CalculateTotalButton">Calculate Total Energy Consumption</string>
+    <string name="NumberOfApplianceHint">Number of Appliances</string>
+    <string name="EnergyUsageHint">Power Consumption</string>
+    <string name="EnterInRoomAppliances">Enter in appliance used in rooms</string>
 </resources>
