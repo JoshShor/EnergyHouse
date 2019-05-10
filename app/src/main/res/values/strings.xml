@@ -8,4 +8,20 @@
     <string name="NumberOfApplianceHint">Number of Appliances</string>
     <string name="EnergyUsageHint">Power Consumption</string>
     <string name="EnterInRoomAppliances">Enter in appliance used in rooms</string>
+    <string name="fuel_log">Fill-Up Log</string>
+    <string name="date">Date</string>
+    <string name="gallons">Gallons</string>
+    <string name="pricePerGallon">Price Per Gallon</string>
+    <string name="odometerReading">Odometer</string>
+    <string name="save">Save</string>
+    <string name="newUserSetup">New User Setup</string>
+    <string name="unitOfVolume">Units of Volume</string>
+    <string name="liters">Liters</string>
+    <string name="unitsOfDistance">Units of Distance</string>
+    <string name="miles">Miles</string>
+    <string name="kilometers">Kilometers</string>
+    <string name="priceOfElectricity">Price of Electricity</string>
+    <string name="done">Done</string>
+    <string name="selectACar">Select a Car</string>
+    <string name="carSelectInstructions">Select a car that you would like to use to compare your transporation savings by switching to a more ecological mode of transporation</string>
 </resources>

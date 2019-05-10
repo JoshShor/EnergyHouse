@@ -33,8 +33,8 @@ public class MenuActivity extends AppCompatActivity {
 
     //switchToTransport
     public void switchToTransport(View v){
-        Intent solarIntent = new Intent(this, EnergyActivity.class);
-        startActivity(solarIntent);
+        Intent transportIntent = new Intent(this, TransportSetupActivity.class);
+        startActivity(transportIntent);
     }
 
 }
