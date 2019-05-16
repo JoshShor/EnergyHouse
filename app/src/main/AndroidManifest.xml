@@ -9,6 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!-- Dennis's Activities-->
+        <activity android:name=".RecyclingActivity"/>
+        <activity android:name=".WhereToRecycleActivity"/>
+        <activity android:name=".WhatGoesWhereActivity"/>
+        <activity android:name=".CalculateRecyclablesActivity"/>
+        <activity android:name=".ImpactActivity"/>
+        <!-- End of Dennis's Activities-->
+
         <activity android:name=".CarSelectActivity"></activity>
         <activity android:name=".RechargerNearMeActivity" />
         <activity android:name=".FuelMileageDataEntryActivity" />
