@@ -1,5 +1,6 @@
 package cs134.miracosta.edu.energyhouse.model;
 
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -15,8 +16,15 @@ public class DBHelper extends SQLiteOpenHelper {
     private Context mContext;
 
     //TASK 1: DEFINE THE DATABASE VERSION, NAME AND TABLE NAME
-    public static final String DATABASE_NAME = "EnergyHouse";
+    public static final String DATABASE_NAME = "ENERGYHOUSE";
     private static final int DATABASE_VERSION = 1;
+  
+  //TASK: DEFINE THE FIELDS (COLUMN NAMES) FOR THE SOLAR TABLE
+    private static final String SOLAR_TABLE = "Solar";
+    private static final String COURSES_KEY_FIELD_ID = "_id";
+    private static final String FIELD_ALPHA = "alpha";
+    private static final String FIELD_NUMBER = "number";
+    private static final String FIELD_TITLE = "title";
 
 
     // DEFINE THE FIELDS (COLUMN NAMES) FOR THE MilageFuelLog TABLE
