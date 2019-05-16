@@ -7,7 +7,6 @@ public class MileageFuel {
     double fuelAmt;
     double odometerReading;
     double pricePerUnitFuel;
-    double totalCostFillUp;
 
     public MileageFuel() {
 
@@ -62,12 +61,9 @@ public class MileageFuel {
     }
 
     public double getTotalCostFillUp() {
-        return totalCostFillUp;
+        return pricePerUnitFuel * fuelAmt;
     }
 
-    public void setTotalCostFillUp(double totalCostFillUp) {
-        this.totalCostFillUp = totalCostFillUp;
-    }
 
     public double calculateTotalCost(){
 
