@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cs134.miracosta.edu.energyhouse">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,6 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+
         <!-- Dennis's Activities-->
         <activity android:name=".RecyclingActivity"/>
         <activity android:name=".WhereToRecycleActivity"/>
@@ -17,6 +22,7 @@
         <activity android:name=".CalculateRecyclablesActivity"/>
         <activity android:name=".ImpactActivity"/>
         <!-- End of Dennis's Activities-->
+
 
         <activity android:name=".CarSelectActivity"></activity>
         <activity android:name=".RechargerNearMeActivity" />
