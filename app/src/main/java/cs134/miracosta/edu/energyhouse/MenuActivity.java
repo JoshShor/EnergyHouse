@@ -27,8 +27,8 @@ public class MenuActivity extends AppCompatActivity {
 
     //switchToRecycle
     public void switchToRecycle(View v){
-        Intent solarIntent = new Intent(this, EnergyActivity.class);
-        startActivity(solarIntent);
+        Intent recyclingIntent = new Intent(this, RecyclingActivity.class);
+        startActivity(recyclingIntent);
     }
 
     //switchToTransport
