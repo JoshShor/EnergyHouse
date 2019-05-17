@@ -12,7 +12,7 @@
     <string name="date">Date</string>
     <string name="gallons">Gallons</string>
     <string name="pricePerGallon">Price Per Gallon</string>
-    <string name="odometerReading">Odometer</string>
+    <string name="odometerReading">"Odometer: "</string>
     <string name="save">Save</string>
     <string name="newUserSetup">New User Setup</string>
     <string name="unitOfVolume">Units of Volume</string>
@@ -25,4 +25,6 @@
     <string name="selectACar">Select a Car</string>
     <string name="need_gpsPerms">In order to proceed you need to enable GPS permissions for this app on this device</string>
     <string name="carSelectInstructions">Select a car that you would like to use to compare your transporation savings by switching to a more ecological mode of transporation</string>
+    <string name="number_of_gallons">Number of Gallons:</string>
+    <string name="total_cost">Total Cost: $</string>
 </resources>
