@@ -14,7 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".CarSelectActivity"></activity>
         <activity android:name=".RechargerNearMeActivity" />
         <activity android:name=".FuelMileageDataEntryActivity" />
         <activity android:name=".TransportSetupActivity" />
