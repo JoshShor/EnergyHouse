@@ -23,6 +23,7 @@
     <string name="priceOfElectricity">Price of Electricity</string>
     <string name="done">Done</string>
     <string name="selectACar">Select a Car</string>
+    <string name="need_gpsPerms">In order to proceed you need to enable GPS permissions for this app on this device</string>
     <string name="carSelectInstructions">Select a car that you would like to use to compare your transporation savings by switching to a more ecological mode of transporation</string>
 
     <!-- Dennis's Strings -->
