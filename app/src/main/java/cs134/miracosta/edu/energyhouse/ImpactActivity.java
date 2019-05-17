@@ -11,13 +11,13 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import cs134.miracosta.edu.energyhouse.model.ImpactDBHelper;
+import cs134.miracosta.edu.energyhouse.model.DBHelper;
 import cs134.miracosta.edu.energyhouse.model.ImpactItem;
 
 
 public class ImpactActivity extends AppCompatActivity {
 
-    private ImpactDBHelper mImpactDBHelper;
+    private DBHelper mImpactDBHelper;
     private List<ImpactItem> mImpactItemList;
     private ImpactItemListAdapter mImpactItemListAdapter;
 
@@ -42,7 +42,7 @@ public class ImpactActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_impact);
 
-        mImpactDBHelper = new ImpactDBHelper(this);
+        mImpactDBHelper = new DBHelper(this);
         mImpactItemList = mImpactDBHelper.getAllImpactItems();
         mImpactItemListAdapter = new ImpactItemListAdapter(this, R.layout.impact_item_list_item, mImpactItemList);
         impactLogListView = findViewById(R.id.impactLogListView);

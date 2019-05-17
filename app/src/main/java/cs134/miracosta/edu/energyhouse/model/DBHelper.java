@@ -18,6 +18,10 @@ public class DBHelper extends SQLiteOpenHelper {
     //TASK 1: DEFINE THE DATABASE VERSION, NAME AND TABLE NAME
     public static final String DATABASE_NAME = "ENERGYHOUSE";
     private static final int DATABASE_VERSION = 1;
+
+    //Dennis's Table**********************************************************
+    private static final String IMPACT_TABLE = "ImpactItems";
+    //End Dennis's Table**********************************************************
   
   //TASK: DEFINE THE FIELDS (COLUMN NAMES) FOR THE SOLAR TABLE
     private static final String SOLAR_TABLE = "Solar";
@@ -25,6 +29,12 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String FIELD_ALPHA = "alpha";
     private static final String FIELD_NUMBER = "number";
     private static final String FIELD_TITLE = "title";
+
+    //Dennis's Fields**********************************************************
+    private static final String KEY_IMPACT_FIELD_ID = "_id";
+    private static final String FIELD_POUNDS_PAPER = "paper";
+    private static final String FIELD_POUNDS_MIXED = "mixed";
+    //End Dennis's Fields**********************************************************
 
 
     // DEFINE THE FIELDS (COLUMN NAMES) FOR THE MilageFuelLog TABLE
@@ -72,6 +82,15 @@ public class DBHelper extends SQLiteOpenHelper {
                 + FIELD_LATITUDE + " REAL, "
                 + FIELD_LONGITUDE + " REAL" + ")";
         database.execSQL(createQuery);
+
+        //Dennis's Table onCreate**********************************************************
+        String table = "CREATE TABLE IF NOT EXISTS " + IMPACT_TABLE + "("
+                + KEY_IMPACT_FIELD_ID + " INTEGER PRIMARY KEY, "
+                + FIELD_POUNDS_PAPER + " REAL, "
+                + FIELD_POUNDS_MIXED + " REAL"
+                + ")";
+        database.execSQL (table);
+        //End Dennis's Table onCreate**********************************************************
     }
 
     @Override
@@ -80,6 +99,11 @@ public class DBHelper extends SQLiteOpenHelper {
                           int newVersion) {
         database.execSQL("DROP TABLE IF EXISTS " + MILAGELOG_TABLE);
         database.execSQL("DROP TABLE IF EXISTS " + LOCATIONS_TABLE);
+
+        //Dennis's Table onUpgrade**********************************************************
+        database.execSQL("DROP TABLE IF EXISTS " + IMPACT_TABLE);
+        //End Dennis's Table onUpgrade**********************************************************
+
         onCreate(database);
     }
 
@@ -189,5 +213,106 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return entry;
     }
+
+
+
+    //Dennis's DBHelper methods**********************************************************
+
+    public void addImpactItem(ImpactItem impactItem) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(FIELD_POUNDS_PAPER, impactItem.getPoundsOfPaper());
+
+        values.put(FIELD_POUNDS_MIXED, impactItem.getPoundsOfMixedRecyclables());
+
+        // INSERT THE ROW IN THE TABLE
+        long id = db.insert(IMPACT_TABLE, null, values);
+
+        impactItem.setId(id);
+
+        // CLOSE THE DATABASE CONNECTION
+        db.close();
+    }
+
+    public List<ImpactItem> getAllImpactItems() {
+        List<ImpactItem> impactItemsList = new ArrayList<>();
+        SQLiteDatabase database = getReadableDatabase();
+        // A cursor is the results of a database query (what gets returned)
+        Cursor cursor = database.query(
+                IMPACT_TABLE,
+                new String[]{KEY_IMPACT_FIELD_ID, FIELD_POUNDS_PAPER, FIELD_POUNDS_MIXED},
+                null,
+                null,
+                null, null, null, null );
+
+        //COLLECT EACH ROW IN THE TABLE
+        if (cursor.moveToFirst()){
+            do {
+                ImpactItem impactItem =
+                        new ImpactItem(cursor.getLong(0),
+                                cursor.getDouble(1),
+                                cursor.getDouble(2));
+                impactItemsList.add(impactItem);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        database.close();
+        return impactItemsList;
+    }
+
+    public void deleteImpactItem(ImpactItem impactItem){
+        SQLiteDatabase db = getWritableDatabase();
+
+        // DELETE THE TABLE ROW
+        db.delete(IMPACT_TABLE, KEY_IMPACT_FIELD_ID + " = ?",
+                new String[] {String.valueOf(impactItem.getId())});
+        db.close();
+    }
+
+    public void deleteAllImpactItems()
+    {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(IMPACT_TABLE, null, null);
+        db.close();
+    }
+
+    public void updateImpactItem(ImpactItem impactItem){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(FIELD_POUNDS_PAPER, impactItem.getPoundsOfPaper());
+        values.put(FIELD_POUNDS_MIXED, impactItem.getPoundsOfMixedRecyclables());
+
+        db.update(IMPACT_TABLE, values, KEY_IMPACT_FIELD_ID + " = ?",
+                new String[]{String.valueOf(impactItem.getId())});
+        db.close();
+    }
+
+    public ImpactItem getImpactItem(int id) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(
+                IMPACT_TABLE,
+                new String[]{KEY_IMPACT_FIELD_ID, FIELD_POUNDS_PAPER, FIELD_POUNDS_MIXED},
+                KEY_IMPACT_FIELD_ID + "=?",
+                new String[]{String.valueOf(id)},
+                null, null, null, null );
+
+        ImpactItem impactItem = null;
+        if (cursor != null) {
+            cursor.moveToFirst();
+
+            impactItem = new ImpactItem(
+                    cursor.getLong(0),
+                    cursor.getDouble(1),
+                    cursor.getDouble(2));
+
+            cursor.close();
+        }
+        db.close();
+        return impactItem;
+    }
+
+    //End Dennis's DBHelper methods**********************************************************
 }
 
