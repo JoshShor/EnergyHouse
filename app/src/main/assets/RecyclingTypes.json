@@ -1,0 +1,33 @@
+{
+  "RecyclingTypes":
+  [
+    {
+      "Name": "Batteries",
+      "HowToDispose": "Batteries can be given to local recycling centers and drop-off locations such as Best Buy, Home Depot, Staples and Lowes."
+    },
+    {
+      "Name": "Beverage Containers",
+      "HowToDispose": "These can be redeemed at a local recycling center or picked up by the regular public waste management system."
+    },
+    {
+      "Name": "Carpet",
+      "HowToDispose": "Should be given to a carpet collection facility for recycling."
+    },
+    {
+      "Name": "E-Waste",
+      "HowToDispose": "Do not throw these in the trash. They can be brought to an e-waste recycler such as Best Buy or Staples."
+    },
+    {
+      "Name": "Mattresses",
+      "HowToDispose": "Can be donated or dropped of at a designated collection center."
+    },
+    {
+      "Name": "Organic Waste",
+      "HowToDispose": "This waste can be composted at home or by the city or private company."
+    },
+    {
+      "Name": "Used Motor Oil",
+      "HowToDispose": "Can be given to a certified collection center for recycling."
+    }
+  ]
+}

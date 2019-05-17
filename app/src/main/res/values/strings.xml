@@ -27,4 +27,30 @@
     <string name="carSelectInstructions">Select a car that you would like to use to compare your transporation savings by switching to a more ecological mode of transporation</string>
     <string name="number_of_gallons">Number of Gallons:</string>
     <string name="total_cost">Total Cost: $</string>
+
+
+    <!-- Dennis's Strings -->
+    <string name="where_to_recycle">Where to recycle?</string>
+    <string name="calc_recyclables">Calculate your recyclables</string>
+    <string name="what_goes_where">What goes where?</string>
+    <string name="impact_tracker">Impact tracker</string>
+    <string name="enter_recyclables_impact">Enter pounds of recyclables</string>
+    <string name="add_to_log">Add to log</string>
+    <string name="pounds_paper">Pounds of paper:</string>
+    <string name="pounds_mixed">Pounds of mixed recyclables:</string>
+    <string name="num_trees">Number of trees</string>
+    <string name="gallons_oil">Gallons of oil</string>
+    <string name="hours_elec">Hours of electricity</string>
+    <string name="gallons_water">Gallons of water</string>
+    <string name="calc_value">Calculate Value</string>
+    <string name="pounds_alum">Pounds of aluminum cans:</string>
+    <string name="pounds_PET">Pounds of clear PET bottles:</string>
+    <string name="pounds_HDPE">Pounds of HDPE plastic bottles:</string>
+    <string name="pounds_glass">Pounds of glass bottles:</string>
+    <string name="value_amt">Total value:</string>
+    <string name="what_goes_where_instructions">Please select an item from the following for more information.</string>
+    <string name="clear_log">Clear log</string>
+    <string name="entry_num">Entry number: </string>
+    <string name="invalid_impact">Please enter all information.</string>
+    <!-- End of Dennis's Strings -->
 </resources>
