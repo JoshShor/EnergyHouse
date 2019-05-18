@@ -52,5 +52,17 @@
     <string name="clear_log">Clear log</string>
     <string name="entry_num">Entry number: </string>
     <string name="invalid_impact">Please enter all information.</string>
+    <string name="see_report">Transportation Report</string>
+    <string name="find_charging_stations">Nearest Charging Station</string>
+    <string name="log_fillup">Log Fillup</string>
+    <string name="nearest_charging_station">Nearest Charging Station</string>
+    <string name="fuel_report_title">Fossil Fuel Consuption Report</string>
+    <string name="report_from">From:</string>
+    <string name="to">To:</string>
+    <string name="total_fuel_used">Total Fossil Fuel Used:</string>
+    <string name="total_distance_driven">Total Distance Driven:</string>
+    <string name="total_spent">Total Spent:</string>
+    <string name="kw_energy_used">"Total Kilowatts: "</string>
+    <string name="data_reported">Data Reported</string>
     <!-- End of Dennis's Strings -->
 </resources>

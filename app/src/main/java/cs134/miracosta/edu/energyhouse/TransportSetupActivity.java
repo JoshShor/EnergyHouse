@@ -39,17 +39,18 @@ public class TransportSetupActivity extends AppCompatActivity {
         // Check for first run or upgrade
         if (currentVersionCode == savedVersionCode) {
 
-            Intent transportIntent = new Intent(this, FuelMileageDataEntryActivity.class);
+            Intent transportIntent = new Intent(this, TransportationActivity.class);
             startActivity(transportIntent);
+            finish();
             return;
 
-        } else if (savedVersionCode == DOESNT_EXIST) {
-
+        } else if (savedVersionCode == DOESNT_EXIST) {  //Mean that the app running for first time
+            //run SetupActivity
             setContentView(R.layout.activity_transport_setup);
 
-        } else if (currentVersionCode > savedVersionCode) {
+        } else if (currentVersionCode > savedVersionCode) { //Mean that the app is updated
 
-            Intent transportIntent = new Intent(this, TransportSetupActivity.class);
+            Intent transportIntent = new Intent(this, TransportationActivity.class);
             startActivity(transportIntent);
         }
 
@@ -60,8 +61,9 @@ public class TransportSetupActivity extends AppCompatActivity {
     public void saveSetupButtonClick(View view){
 
         EditText electricityCost = findViewById(R.id.electricityPriceEditText);
-        Intent transportIntent = new Intent(this, FuelMileageDataEntryActivity.class);
+        Intent transportIntent = new Intent(this, TransportationActivity.class);
         startActivity(transportIntent);
+        finish();
     }
 
 }

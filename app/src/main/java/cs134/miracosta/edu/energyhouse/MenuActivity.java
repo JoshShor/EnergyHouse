@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.Button;
 
 public class MenuActivity extends AppCompatActivity {
@@ -11,6 +12,7 @@ public class MenuActivity extends AppCompatActivity {
     private Button solarButton;
     private Button recycleButton;
     private Button switchToTransport;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
