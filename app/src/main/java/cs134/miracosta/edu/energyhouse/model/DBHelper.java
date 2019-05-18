@@ -3,12 +3,19 @@ package cs134.miracosta.edu.energyhouse.model;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
+import android.util.Log;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -21,6 +28,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //Dennis's Table**********************************************************
     private static final String IMPACT_TABLE = "ImpactItems";
+    private static final String RECYCLING_LOCATIONS_TABLE = "Recycling_Locations";
     //End Dennis's Table**********************************************************
   
   //TASK: DEFINE THE FIELDS (COLUMN NAMES) FOR THE SOLAR TABLE
@@ -34,6 +42,16 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String KEY_IMPACT_FIELD_ID = "_id";
     private static final String FIELD_POUNDS_PAPER = "paper";
     private static final String FIELD_POUNDS_MIXED = "mixed";
+
+    private static final String RECYCLING_LOCATIONS_KEY_FIELD_ID = "_id";
+    private static final String RECYCLING_FIELD_NAME = "name";
+    private static final String RECYCLING_FIELD_ADDRESS = "address";
+    private static final String RECYCLING_FIELD_CITY = "city";
+    private static final String RECYCLING_FIELD_STATE = "state";
+    private static final String RECYCLING_FIELD_ZIP_CODE = "zip_code";
+    private static final String RECYCLING_FIELD_PHONE = "phone";
+    private static final String RECYCLING_FIELD_LATITUDE = "latitude";
+    private static final String RECYCLING_FIELD_LONGITUDE = "longitude";
     //End Dennis's Fields**********************************************************
 
 
@@ -90,6 +108,21 @@ public class DBHelper extends SQLiteOpenHelper {
                 + FIELD_POUNDS_MIXED + " REAL"
                 + ")";
         database.execSQL (table);
+
+        createQuery = "CREATE TABLE IF NOT EXISTS " + RECYCLING_LOCATIONS_TABLE + "("
+                + RECYCLING_LOCATIONS_KEY_FIELD_ID + " INTEGER PRIMARY KEY, "
+                + RECYCLING_FIELD_NAME + " TEXT, "
+                + RECYCLING_FIELD_ADDRESS + " TEXT, "
+                + RECYCLING_FIELD_CITY + " TEXT,"
+                + RECYCLING_FIELD_STATE + " TEXT,"
+                + RECYCLING_FIELD_ZIP_CODE + " TEXT,"
+                + RECYCLING_FIELD_PHONE + " TEXT,"
+                + RECYCLING_FIELD_LATITUDE + " REAL,"
+                + RECYCLING_FIELD_LONGITUDE + " REAL"
+                + ")";
+        System.out.println("QWRE$T##@#$@#%$^%&^*&&^%$%^&*&&^%$#%^YUYIU%$#%^&*^%$#$%^RT&UYIUTYRE%W$#Q$E%RYTUI");
+        database.execSQL(createQuery);
+
         //End Dennis's Table onCreate**********************************************************
     }
 
@@ -102,6 +135,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         //Dennis's Table onUpgrade**********************************************************
         database.execSQL("DROP TABLE IF EXISTS " + IMPACT_TABLE);
+        database.execSQL("DROP TABLE IF EXISTS " + RECYCLING_LOCATIONS_TABLE);
         //End Dennis's Table onUpgrade**********************************************************
 
         onCreate(database);
@@ -311,6 +345,145 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         db.close();
         return impactItem;
+    }
+
+    //Dennis's Recycling locations db helper methods************************************
+
+
+    public void addRecyclingLocation(RecycleLocation location) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(RECYCLING_FIELD_NAME, location.getName());
+        values.put(RECYCLING_FIELD_ADDRESS, location.getAddress());
+        values.put(RECYCLING_FIELD_CITY, location.getCity());
+        values.put(RECYCLING_FIELD_STATE, location.getState());
+        values.put(RECYCLING_FIELD_ZIP_CODE, location.getZipCode());
+        values.put(RECYCLING_FIELD_PHONE, location.getPhone());
+        values.put(RECYCLING_FIELD_LATITUDE, location.getLatitude());
+        values.put(RECYCLING_FIELD_LONGITUDE, location.getLongitude());
+
+        long id = db.insert(RECYCLING_LOCATIONS_TABLE, null, values);
+        location.setId(id);
+        // CLOSE THE DATABASE CONNECTION
+        db.close();
+    }
+
+
+    public List<RecycleLocation> getAllRecyclingLocations() {
+        ArrayList<RecycleLocation> locationsList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                RECYCLING_LOCATIONS_TABLE,
+                new String[]{RECYCLING_LOCATIONS_KEY_FIELD_ID, RECYCLING_FIELD_NAME,
+                        RECYCLING_FIELD_ADDRESS, RECYCLING_FIELD_CITY, RECYCLING_FIELD_STATE,
+                        RECYCLING_FIELD_ZIP_CODE, RECYCLING_FIELD_PHONE, RECYCLING_FIELD_LATITUDE,
+                        RECYCLING_FIELD_LONGITUDE},
+                null,
+                null,
+                null, null, null, null);
+
+        //COLLECT EACH ROW IN THE TABLE
+        if (cursor.moveToFirst()) {
+            do {
+                RecycleLocation location =
+                        new RecycleLocation(cursor.getLong(0),
+                                cursor.getString(1),
+                                cursor.getString(2),
+                                cursor.getString(3),
+                                cursor.getString(4),
+                                cursor.getString(5),
+                                cursor.getString(6),
+                                cursor.getDouble(7),
+                                cursor.getDouble(8));
+                locationsList.add(location);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return locationsList;
+    }
+
+    public void deleteRecylingLocation(RecycleLocation location) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // DELETE THE TABLE ROW
+        db.delete(RECYCLING_LOCATIONS_TABLE, RECYCLING_LOCATIONS_KEY_FIELD_ID + " = ?",
+                new String[]{String.valueOf(location.getId())});
+        db.close();
+    }
+
+    public void deleteAllRecyclingLocations() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(RECYCLING_LOCATIONS_TABLE, null, null);
+        db.close();
+    }
+
+    public RecycleLocation getRecyclingLocation(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                RECYCLING_LOCATIONS_TABLE,
+                new String[]{RECYCLING_LOCATIONS_KEY_FIELD_ID, RECYCLING_FIELD_NAME,
+                        RECYCLING_FIELD_ADDRESS, RECYCLING_FIELD_CITY, RECYCLING_FIELD_STATE,
+                        RECYCLING_FIELD_ZIP_CODE, RECYCLING_FIELD_PHONE, RECYCLING_FIELD_LATITUDE,
+                        RECYCLING_FIELD_LONGITUDE},
+                RECYCLING_LOCATIONS_KEY_FIELD_ID + "=?",
+                new String[]{String.valueOf(id)},
+                null, null, null, null);
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        RecycleLocation location =
+                new RecycleLocation(cursor.getLong(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getString(4),
+                        cursor.getString(5),
+                        cursor.getString(6),
+                        cursor.getDouble(7),
+                        cursor.getDouble(8));
+        cursor.close();
+        db.close();
+        return location;
+    }
+
+    public boolean importRecyclingLocationsFromCSV(String csvFileName) {
+        AssetManager manager = mContext.getAssets();
+        InputStream inStream;
+        try {
+            inStream = manager.open(csvFileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        BufferedReader buffer = new BufferedReader(new InputStreamReader(inStream));
+        String line;
+        try {
+            while ((line = buffer.readLine()) != null) {
+                String[] fields = line.split(",");
+                if (fields.length != 9) {
+                    Log.d("Caffeine Locations", "Skipping Bad CSV Row: " + Arrays.toString(fields));
+                    continue;
+                }
+                long id = Long.parseLong(fields[0].trim());
+                String name = fields[1].trim();
+                String address = fields[2].trim();
+                String city = fields[3].trim();
+                String state = fields[4].trim();
+                String zipCode = fields[5].trim();
+                String phone = fields[6].trim();
+                double latitude = Double.parseDouble(fields[7].trim());
+                double longitude = Double.parseDouble(fields[8].trim());
+                addRecyclingLocation(new RecycleLocation(id, name, address, city, state, zipCode, phone, latitude, longitude));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     //End Dennis's DBHelper methods**********************************************************
