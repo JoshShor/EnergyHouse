@@ -120,7 +120,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + RECYCLING_FIELD_LATITUDE + " REAL,"
                 + RECYCLING_FIELD_LONGITUDE + " REAL"
                 + ")";
-        
+
         database.execSQL(createQuery);
 
         //End Dennis's Table onCreate**********************************************************
