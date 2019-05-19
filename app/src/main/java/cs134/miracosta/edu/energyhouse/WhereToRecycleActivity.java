@@ -54,7 +54,7 @@ public class WhereToRecycleActivity extends AppCompatActivity implements OnMapRe
         map.addMarker(new MarkerOptions()
                 .position(myPosition)
                 .title("Current Location")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.my_marker)));
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.my_marker_recycling)));
 
         //move the camera to our position
         CameraPosition cameraPosition = new CameraPosition.Builder()
@@ -78,7 +78,7 @@ public class WhereToRecycleActivity extends AppCompatActivity implements OnMapRe
 
             map.addMarker(new MarkerOptions()
                     .position(position)
-                    .title(location.getName()));
+                    .title(location.getInfo()));
         }
     }
 }

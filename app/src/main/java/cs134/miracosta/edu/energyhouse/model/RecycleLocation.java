@@ -149,6 +149,12 @@ public class RecycleLocation implements Parcelable
                 '}';
     }
 
+    public String getInfo()
+    {
+        return mName + '\n' + mAddress + '\n' + mCity +
+                '\n' + mState + '\n' + mZipCode +  + '\n' + mPhone;
+    }
+
 
     @Override
     public int describeContents() {
