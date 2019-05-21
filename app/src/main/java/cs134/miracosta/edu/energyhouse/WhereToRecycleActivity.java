@@ -34,6 +34,12 @@ import java.util.List;
 import cs134.miracosta.edu.energyhouse.model.DBHelper;
 import cs134.miracosta.edu.energyhouse.model.RecycleLocation;
 
+/**
+ * WhereToRecycleActivity.java - Activity to let user see nearby recycling locations
+ *
+ * @author Dennis La
+ * @version 1.0
+ */
 public class WhereToRecycleActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private DBHelper db;
