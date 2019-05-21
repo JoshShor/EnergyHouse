@@ -30,7 +30,7 @@ public class CalculateRecyclablesActivity extends AppCompatActivity {
 
     /**
      * Creates the activity
-     * 
+     *
      * @param savedInstanceState
      */
     @Override

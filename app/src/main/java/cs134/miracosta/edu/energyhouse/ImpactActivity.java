@@ -17,7 +17,12 @@ import java.util.List;
 import cs134.miracosta.edu.energyhouse.model.DBHelper;
 import cs134.miracosta.edu.energyhouse.model.ImpactItem;
 
-
+/**
+ * ImpactActivity.java - Activity to let user record their impact on environment
+ *
+ * @author Dennis La
+ * @version 1.0
+ */
 public class ImpactActivity extends AppCompatActivity {
 
     private DBHelper mImpactDBHelper;
@@ -46,6 +51,11 @@ public class ImpactActivity extends AppCompatActivity {
     private ImageView waterImageView;
     private Animation fadeInAnimation;
 
+    /**
+     * Creates the activity and initializes the textviews with data from the database
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +93,9 @@ public class ImpactActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Initializes the cumulative total for each ImpactItem
+     */
     private void initializeTotals()
     {
         if(!mImpactItemList.isEmpty())
@@ -97,6 +110,11 @@ public class ImpactActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Adds an item to the item log and database and updates the totals
+     *
+     * @param v add log button
+     */
     public void addToLog(View v)
     {
         if(TextUtils.isEmpty(poundsPaperEditText.getText()) || TextUtils.isEmpty(poundsMixedEditText.getText()))
@@ -118,6 +136,11 @@ public class ImpactActivity extends AppCompatActivity {
         addToTotals(impactItem);
     }
 
+    /**
+     * Helper method to add to the totals
+     *
+     * @param newImpactItem the new impact item
+     */
     private void addToTotals(ImpactItem newImpactItem)
     {
         mNumTrees += newImpactItem.calcNumTreesSaved();
@@ -128,6 +151,11 @@ public class ImpactActivity extends AppCompatActivity {
         setTextViewCounters();
     }
 
+    /**
+     * Clears the log from the database and list view, resets the totals
+     *
+     * @param v the clear log button
+     */
     public void clearLog(View v)
     {
         mImpactDBHelper.deleteAllImpactItems();
@@ -146,6 +174,9 @@ public class ImpactActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Helper method for setting the text views
+     */
     private void setTextViewCounters()
     {
         numTreesTextView.setText(String.valueOf(Math.round(mNumTrees)));
