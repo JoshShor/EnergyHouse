@@ -16,6 +16,12 @@ import java.util.List;
 import cs134.miracosta.edu.energyhouse.model.RecyclingTypes;
 import cs134.miracosta.edu.energyhouse.model.RecyclingTypesJSONLoader;
 
+/**
+ * WhatGoesWhereActivity.java - Activity that informs the user of how to recycle certain objects
+ *
+ * @author Dennis La
+ * @version 1.0
+ */
 public class WhatGoesWhereActivity extends AppCompatActivity {
 
     private TextView itemTypeTextView;
@@ -23,11 +29,16 @@ public class WhatGoesWhereActivity extends AppCompatActivity {
 
     private ListView recyclingTypesListView;
 
-    List<RecyclingTypes> allRecyclingTypes;
+    private List<RecyclingTypes> allRecyclingTypes;
 
-    ImageView recyclingBinImageView;
+    private ImageView recyclingBinImageView;
     private Animation fadeInAnimation;
 
+    /**
+     * Creates the activity and loads info from JSON file
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +67,11 @@ public class WhatGoesWhereActivity extends AppCompatActivity {
         recyclingTypesListView.setAdapter(recyclingTypesListAdapter);
     }
 
+    /**
+     * Shows user information about how to dispose the chosen item
+     *
+     * @param v list item view
+     */
     public void showInfo(View v)
     {
         RecyclingTypes selectedRecyclingType = (RecyclingTypes) v.getTag();
