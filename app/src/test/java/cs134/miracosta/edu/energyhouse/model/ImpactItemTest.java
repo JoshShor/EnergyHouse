@@ -5,17 +5,29 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * ImpactItemTest.java - Tests the ImpactItem class
+ *
+ * @author Dennis La
+ * @version 1.0
+ */
 public class ImpactItemTest
 {
     private ImpactItem testImpactItem;
 
+    /**
+     * Create new ImpactItem
+     */
     @Before
-    public void setUp() throws Exception
+    public void setUp()
     {
         //instantiate objects used for testing
         testImpactItem = new ImpactItem();
     }
 
+    /**
+     * Tests getPoundsOfPaper
+     */
     @Test
     public void testGetPoundsPaper()
     {
@@ -23,6 +35,9 @@ public class ImpactItemTest
                 testImpactItem.getPoundsOfPaper(), 0);
     }
 
+    /**
+     * Tests setPoundsOfPaper
+     */
     @Test
     public void testSetPoundsPaper()
     {
@@ -31,6 +46,9 @@ public class ImpactItemTest
                 testImpactItem.getPoundsOfPaper(), 0);
     }
 
+    /**
+     * Tests getPoundsOfMixedRecyclables
+     */
     @Test
     public void testGetPoundsMixedRecyclables()
     {
@@ -38,6 +56,9 @@ public class ImpactItemTest
                 testImpactItem.getPoundsOfMixedRecyclables(), 0);
     }
 
+    /**
+     * Tests setPoundsOfMixedRecyclables
+     */
     @Test
     public void testSetPoundsMixedRecyclables()
     {
@@ -46,12 +67,18 @@ public class ImpactItemTest
                 testImpactItem.getPoundsOfMixedRecyclables(), 0);
     }
 
+    /**
+     * Tests getId
+     */
     @Test
     public void testGetId()
     {
         assertEquals("Testing getId method", -1, testImpactItem.getId());
     }
 
+    /**
+     * Tests setId
+     */
     @Test
     public void testSetId()
     {
@@ -59,18 +86,24 @@ public class ImpactItemTest
         assertEquals("Testing setId method", 321, testImpactItem.getId());
     }
 
+    /**
+     * Tests calcNumTreesSaved
+     */
     @Test
     public void testCalcNumTreesSaved()
     {
         testImpactItem.setPoundsOfPaper(50);
         testImpactItem.setPoundsOfMixedRecyclables(50);
-        
+
         int numTrees = (int) Math.round(testImpactItem.calcNumTreesSaved());
 
         assertEquals("Testing calcNumTreesSaved method", 7, numTrees);
 
     }
 
+    /**
+     * Tests calcNumGallonsOfOilSaved
+     */
     @Test
     public void testCalcNumGallonsOfOilSaved()
     {
@@ -83,6 +116,9 @@ public class ImpactItemTest
 
     }
 
+    /**
+     * Tests calcHoursOfElectricitySaved
+     */
     @Test
     public void testCalcHoursOfElectricitySaved()
     {
@@ -95,6 +131,9 @@ public class ImpactItemTest
 
     }
 
+    /**
+     * Tests calcNumGallonsOfWaterSaved
+     */
     @Test
     public void calcNumGallonsOfWaterSaved()
     {
