@@ -47,16 +47,64 @@ public class ImpactItemTest
     }
 
     @Test
-    public void getId()
+    public void testGetId()
     {
         assertEquals("Testing getId method", -1, testImpactItem.getId());
     }
 
     @Test
-    public void setId()
+    public void testSetId()
     {
         testImpactItem.setId(321);
         assertEquals("Testing setId method", 321, testImpactItem.getId());
+    }
+
+    @Test
+    public void testCalcNumTreesSaved()
+    {
+        testImpactItem.setPoundsOfPaper(50);
+        testImpactItem.setPoundsOfMixedRecyclables(50);
+        
+        int numTrees = (int) Math.round(testImpactItem.calcNumTreesSaved());
+
+        assertEquals("Testing calcNumTreesSaved method", 7, numTrees);
+
+    }
+
+    @Test
+    public void testCalcNumGallonsOfOilSaved()
+    {
+        testImpactItem.setPoundsOfPaper(50);
+        testImpactItem.setPoundsOfMixedRecyclables(50);
+
+        int numOil = (int) Math.round(testImpactItem.calcNumGallonsOfOilSaved());
+
+        assertEquals("Testing calcNumGallonsOfOilSaved method", 163, numOil);
+
+    }
+
+    @Test
+    public void testCalcHoursOfElectricitySaved()
+    {
+        testImpactItem.setPoundsOfPaper(50);
+        testImpactItem.setPoundsOfMixedRecyclables(50);
+
+        int numElec = (int) Math.round(testImpactItem.calcHoursOfElectricitySaved());
+
+        assertEquals("Testing calcHoursOfElectricitySaved method", 1307, numElec);
+
+    }
+
+    @Test
+    public void calcNumGallonsOfWaterSaved()
+    {
+        testImpactItem.setPoundsOfPaper(50);
+        testImpactItem.setPoundsOfMixedRecyclables(50);
+
+        int numWater = (int) Math.round(testImpactItem.calcNumGallonsOfWaterSaved());
+
+        assertEquals("Testing calcNumGallonsOfWaterSaved method", 2080, numWater);
+
     }
 
 }
