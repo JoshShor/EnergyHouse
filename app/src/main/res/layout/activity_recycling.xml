@@ -8,7 +8,7 @@
     tools:context=".RecyclingActivity" >
 
     <ImageView
-        android:id="@+id/teslaImageView"
+        android:id="@+id/landscapeImageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -33,9 +33,10 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@android:color/holo_green_light"
+                android:background="@drawable/button_bg"
                 android:onClick="goToWhereToActivity"
-                android:text="@string/where_to_recycle" />
+                android:text="@string/where_to_recycle"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused" />
 
             <Button
                 android:id="@+id/nearestChargingMenuButton"
@@ -44,9 +45,10 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@android:color/holo_green_light"
+                android:background="@drawable/button_bg"
                 android:onClick="goToGoesWhereActivity"
-                android:text="@string/what_goes_where" />
+                android:text="@string/what_goes_where"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused" />
 
         </LinearLayout>
 
@@ -63,9 +65,10 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@android:color/holo_green_light"
+                android:background="@drawable/button_bg"
                 android:onClick="goToCalcRecActivity"
-                android:text="@string/calc_recyclables" />
+                android:text="@string/calc_recyclables"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused" />
 
             <Button
                 android:id="@+id/impactButton"
@@ -74,9 +77,10 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@android:color/holo_green_light"
+                android:background="@drawable/button_bg"
                 android:onClick="gotToImpactActivity"
-                android:text="@string/impact_tracker" />
+                android:text="@string/impact_tracker"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused" />
         </LinearLayout>
 
     </LinearLayout>

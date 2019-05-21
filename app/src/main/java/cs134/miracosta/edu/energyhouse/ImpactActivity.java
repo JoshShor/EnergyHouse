@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,12 +38,30 @@ public class ImpactActivity extends AppCompatActivity {
     private TextView hrsElecTextView;
     private TextView galWaterTextView;
 
-    ListView impactLogListView;
+    private ListView impactLogListView;
+
+    private ImageView treeImageView;
+    private ImageView oilImageView;
+    private ImageView elecImageView;
+    private ImageView waterImageView;
+    private Animation fadeInAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_impact);
+
+        treeImageView = findViewById(R.id.treeImageView);
+        oilImageView = findViewById(R.id.oilImageView);
+        elecImageView = findViewById(R.id.elecImageView);
+        waterImageView = findViewById(R.id.waterImageView);
+
+        fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in_anim);
+
+        treeImageView.startAnimation(fadeInAnimation);
+        oilImageView.startAnimation(fadeInAnimation);
+        elecImageView.startAnimation(fadeInAnimation);
+        waterImageView.startAnimation(fadeInAnimation);
 
         mImpactDBHelper = new DBHelper(this);
         mImpactItemList = mImpactDBHelper.getAllImpactItems();

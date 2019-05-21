@@ -72,9 +72,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@android:color/holo_green_light"
+            android:background="@drawable/button_bg"
             android:onClick="clearLog"
-            android:text="@string/clear_log" />
+            android:text="@string/clear_log"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused" />
 
         <Button
             android:id="@+id/addToLogButton"
@@ -83,9 +84,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@android:color/holo_green_light"
+            android:background="@drawable/button_bg"
             android:onClick="addToLog"
-            android:text="@string/add_to_log" />
+            android:text="@string/add_to_log"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused" />
 
     </LinearLayout>
 
@@ -101,6 +103,7 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/treeImageView"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_gravity="center"
@@ -127,6 +130,7 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/oilImageView"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_gravity="center"
@@ -159,6 +163,7 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/elecImageView"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_gravity="center"
@@ -185,7 +190,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/waterImageView"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_gravity="center"

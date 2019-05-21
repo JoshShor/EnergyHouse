@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,10 +25,19 @@ public class WhatGoesWhereActivity extends AppCompatActivity {
 
     List<RecyclingTypes> allRecyclingTypes;
 
+    ImageView recyclingBinImageView;
+    private Animation fadeInAnimation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_what_goes_where);
+
+        recyclingBinImageView = findViewById(R.id.recyclingBinImageView);
+
+        fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in_anim);
+
+        recyclingBinImageView.startAnimation(fadeInAnimation);
 
         try {
             allRecyclingTypes = RecyclingTypesJSONLoader.loadJSONFromAsset(this);

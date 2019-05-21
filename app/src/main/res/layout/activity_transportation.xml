@@ -9,7 +9,7 @@
     tools:context=".TransportationActivity">
 
     <ImageView
-        android:id="@+id/teslaImageView"
+        android:id="@+id/landscapeImageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
