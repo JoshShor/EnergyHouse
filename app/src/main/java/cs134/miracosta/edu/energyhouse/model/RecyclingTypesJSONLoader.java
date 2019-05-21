@@ -12,8 +12,21 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * RecyclingTypesJSONLoader.java - Class that loads the JSON data
+ *
+ * @author Dennis La
+ * @version 1.0
+ */
 public class RecyclingTypesJSONLoader
 {
+    /**
+     * Loads JSON data from a JSON file
+     *
+     * @param context
+     * @return a list of RecyclingTypes
+     * @throws IOException
+     */
     public static List<RecyclingTypes> loadJSONFromAsset(Context context) throws IOException
     {
         List<RecyclingTypes> allRecyclingTypes = new ArrayList<>();
