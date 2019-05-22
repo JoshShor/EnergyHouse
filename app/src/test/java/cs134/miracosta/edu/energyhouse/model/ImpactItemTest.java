@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class ImpactItemTest
 {
-    private ImpactItem testImpactItem;
+    private static ImpactItem testImpactItem;
 
     /**
      * Create new ImpactItem

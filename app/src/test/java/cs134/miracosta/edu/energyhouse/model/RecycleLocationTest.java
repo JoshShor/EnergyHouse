@@ -6,17 +6,17 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 /**
- * RecycleLocationTest.java - Tests the RecycleLocationTest class
+ * RecycleLocationTest.java - Tests the RecycleLocation class
  *
  * @author Dennis La
  * @version 1.0
  */
 public class RecycleLocationTest
 {
-    private RecycleLocation testRecycleLocation;
+    private static RecycleLocation testRecycleLocation;
 
     /**
-     * Create new RecycleLocationTest
+     * Create new RecycleLocation
      */
     @Before
     public void setUp()
