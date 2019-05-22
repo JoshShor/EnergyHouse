@@ -63,7 +63,11 @@ public class WhereToRecycleActivity extends AppCompatActivity implements OnMapRe
     private static final int ALL_PERMISSIONS_RESULT = 1011;
 
 
-
+    /**
+     * Creates the activity and asks the user for locations access permissions
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,6 +110,12 @@ public class WhereToRecycleActivity extends AppCompatActivity implements OnMapRe
 
     }
 
+    /**
+     * Helper to get permissions
+     *
+     * @param wantedPermissions
+     * @return
+     */
     private ArrayList<String> permissionsToRequest(ArrayList<String> wantedPermissions) {
         ArrayList<String> result = new ArrayList<>();
 
@@ -118,6 +128,12 @@ public class WhereToRecycleActivity extends AppCompatActivity implements OnMapRe
         return result;
     }
 
+    /**
+     * Checks if permissions were granted
+     *
+     * @param permission
+     * @return
+     */
     private boolean hasPermission(String permission) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED;
@@ -126,6 +142,9 @@ public class WhereToRecycleActivity extends AppCompatActivity implements OnMapRe
         return true;
     }
 
+    /**
+     * Connects to googleApiClient
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -135,28 +154,12 @@ public class WhereToRecycleActivity extends AppCompatActivity implements OnMapRe
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
 
-    private boolean checkPlayServices() {
-        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
-        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
-
-        if (resultCode != ConnectionResult.SUCCESS) {
-            if (apiAvailability.isUserResolvableError(resultCode)) {
-                apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST);
-            } else {
-                finish();
-            }
-
-            return false;
-        }
-
-        return true;
-    }
-
+    /**
+     * Gets last location
+     *
+     * @param bundle
+     */
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         if (ActivityCompat.checkSelfPermission(this,
@@ -181,6 +184,9 @@ public class WhereToRecycleActivity extends AppCompatActivity implements OnMapRe
         startLocationUpdates();
     }
 
+    /**
+     * Update Location
+     */
     private void startLocationUpdates() {
         locationRequest = new LocationRequest();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -197,14 +203,29 @@ public class WhereToRecycleActivity extends AppCompatActivity implements OnMapRe
         //LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
     }
 
+    /**
+     * Stub
+     * @param i
+     */
     @Override
     public void onConnectionSuspended(int i) {
     }
 
+    /**
+     * Stub
+     * @param connectionResult
+     */
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
     }
 
+    /**
+     * Handles permissions
+     *
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch(requestCode) {
@@ -244,8 +265,11 @@ public class WhereToRecycleActivity extends AppCompatActivity implements OnMapRe
     }
 
 
-
-
+    /**
+     * Creates the markers and moves camera
+     * 
+     * @param googleMap
+     */
     @Override
     public void onMapReady(GoogleMap googleMap)
     {
