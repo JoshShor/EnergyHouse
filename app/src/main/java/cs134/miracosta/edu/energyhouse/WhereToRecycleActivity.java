@@ -267,7 +267,7 @@ public class WhereToRecycleActivity extends AppCompatActivity implements OnMapRe
 
     /**
      * Creates the markers and moves camera
-     * 
+     *
      * @param googleMap
      */
     @Override
