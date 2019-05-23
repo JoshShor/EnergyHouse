@@ -5,15 +5,20 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.List;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
+
 import cs134.miracosta.edu.energyhouse.model.DBHelper;
 import cs134.miracosta.edu.energyhouse.model.FuelMileage;
 
 public class TransportReportActivity extends AppCompatActivity {
 
+    private NumberFormat currency = NumberFormat.getCurrencyInstance(Locale.getDefault());
+    private NumberFormat decimal = NumberFormat.getNumberInstance(Locale.getDefault());
     private DBHelper db;
     private List<FuelMileage> allFuelLogData;
     private TextView totalSpentTextView;
@@ -57,10 +62,10 @@ public class TransportReportActivity extends AppCompatActivity {
         //Display the results
         fromDateTextView.setText(sDate1);
         toDateTextView.setText(sDate2);
-        totalSpentTextView.setText(Double.toString(totalCost));
-        totalFuelTextView.setText(Double.toString(totalFuel));
-        totalKWTextView.setText(Double.toString(totalKW));
-        totalDistanceTextView.setText(Double.toString(totalDistance));
+        totalSpentTextView.setText(currency.format(totalCost));
+        totalFuelTextView.setText(decimal.format(totalFuel));
+        totalKWTextView.setText(decimal.format(totalKW));
+        totalDistanceTextView.setText(decimal.format(totalDistance));
     }
 
     public void calculateKW(){

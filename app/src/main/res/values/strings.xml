@@ -26,7 +26,7 @@
     <string name="need_gpsPerms">In order to proceed you need to enable GPS permissions for this app on this device</string>
     <string name="carSelectInstructions">Select a car that you would like to use to compare your transporation savings by switching to a more ecological mode of transporation</string>
     <string name="number_of_gallons">Number of Gallons:</string>
-    <string name="total_cost">Total Cost: $</string>
+    <string name="total_cost">Total Cost:</string>
 
 
     <!-- Dennis's Strings -->
@@ -64,5 +64,6 @@
     <string name="total_spent">Total Spent:</string>
     <string name="kw_energy_used">"Total Kilowatts: "</string>
     <string name="data_reported">Data Reported</string>
+    <string name="to_report">To Report</string>
     <!-- End of Dennis's Strings -->
 </resources>

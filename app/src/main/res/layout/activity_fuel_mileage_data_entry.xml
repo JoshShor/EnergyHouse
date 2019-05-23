@@ -144,13 +144,16 @@
         </ListView>
 
         <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/toReport"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Button" />
+            android:background="@drawable/button_bg"
+            android:onClick="toReport"
+            android:text="@string/to_report" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
