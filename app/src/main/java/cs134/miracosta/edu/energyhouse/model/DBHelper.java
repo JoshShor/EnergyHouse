@@ -80,6 +80,11 @@ public class DBHelper extends SQLiteOpenHelper {
         mContext = context;
     }
 
+    /**
+     * Creates the tables
+     *
+     * @param database the database of the tables
+     */
     @Override
     public void onCreate(SQLiteDatabase database) {
         String createQuery = "CREATE TABLE " + MILAGELOG_TABLE + "("
@@ -126,6 +131,13 @@ public class DBHelper extends SQLiteOpenHelper {
         //End Dennis's Table onCreate**********************************************************
     }
 
+    /**
+     * Upgrades the database
+     *
+     * @param database the database
+     * @param oldVersion old version number
+     * @param newVersion new version number
+     */
     @Override
     public void onUpgrade(SQLiteDatabase database,
                           int oldVersion,
@@ -252,6 +264,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //Dennis's DBHelper methods**********************************************************
 
+    /**
+     * Adds Impact item to db
+     *
+     * @param impactItem the item to add
+     */
     public void addImpactItem(ImpactItem impactItem) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -269,6 +286,10 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Gets all the ImpactItems from the db
+     * @return a list of the items
+     */
     public List<ImpactItem> getAllImpactItems() {
         List<ImpactItem> impactItemsList = new ArrayList<>();
         SQLiteDatabase database = getReadableDatabase();
@@ -295,6 +316,11 @@ public class DBHelper extends SQLiteOpenHelper {
         return impactItemsList;
     }
 
+    /**
+     * Deletes an ImpactItem in the db
+     *
+     * @param impactItem item to delete
+     */
     public void deleteImpactItem(ImpactItem impactItem){
         SQLiteDatabase db = getWritableDatabase();
 
@@ -304,6 +330,9 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Deletes all ImpactItems in the db
+     */
     public void deleteAllImpactItems()
     {
         SQLiteDatabase db = getWritableDatabase();
@@ -311,6 +340,11 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Update an ImpactItem in the db
+     *
+     * @param impactItem item to update
+     */
     public void updateImpactItem(ImpactItem impactItem){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -323,6 +357,12 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Get an ImpactItem from the db
+     *
+     * @param id the id of the item
+     * @return the item
+     */
     public ImpactItem getImpactItem(int id) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(
@@ -349,7 +389,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //Dennis's Recycling locations db helper methods************************************
 
-
+    /**
+     * Add a recycling location to the db
+     * @param location the location to add
+     */
     public void addRecyclingLocation(RecycleLocation location) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -369,7 +412,11 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-
+    /**
+     * Get all the recycling locations from the db
+     *
+     * @return list of all the recycling locations
+     */
     public List<RecycleLocation> getAllRecyclingLocations() {
         ArrayList<RecycleLocation> locationsList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -404,6 +451,11 @@ public class DBHelper extends SQLiteOpenHelper {
         return locationsList;
     }
 
+    /**
+     * Delete a recycling location in the db
+     *
+     * @param location the recycling location to delete
+     */
     public void deleteRecylingLocation(RecycleLocation location) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -413,12 +465,21 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Delete all recycling locations in the db
+     */
     public void deleteAllRecyclingLocations() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(RECYCLING_LOCATIONS_TABLE, null, null);
         db.close();
     }
 
+    /**
+     * Get a recycling location from the db
+     *
+     * @param id the id of the recycling location
+     * @return the recycling location
+     */
     public RecycleLocation getRecyclingLocation(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(
@@ -449,6 +510,12 @@ public class DBHelper extends SQLiteOpenHelper {
         return location;
     }
 
+    /**
+     * Imports recycling location data from CSV into the db
+     *
+     * @param csvFileName the csv file name
+     * @return whether or not the operation was successful
+     */
     public boolean importRecyclingLocationsFromCSV(String csvFileName) {
         AssetManager manager = mContext.getAssets();
         InputStream inStream;
