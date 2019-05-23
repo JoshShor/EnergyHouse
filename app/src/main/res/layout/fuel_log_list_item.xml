@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView"
-        android:textSize="20sp" />
+        android:textSize="14sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,14 +23,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
-            android:text="@string/odometerReading" />
+            android:text="@string/odometerReading"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/odometerReadingTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -44,13 +46,15 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
             android:layout_weight="0"
-            android:text="@string/number_of_gallons" />
+            android:text="@string/number_of_gallons"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/amtFuelTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -64,13 +68,15 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:text="@string/total_cost" />
+            android:text="@string/total_cost"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/totalFuelCostTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="12sp" />
     </LinearLayout>
 
 

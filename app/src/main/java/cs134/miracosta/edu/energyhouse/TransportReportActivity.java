@@ -135,8 +135,6 @@ public class TransportReportActivity extends AppCompatActivity {
         }else{
             costPerDistanceGas = totalCost/totalDistance;
         }
-
-
     }
 
 

@@ -102,5 +102,6 @@
     <string name="travel_equivalent">Travel Equivalent:</string>
     <string name="cost_equivalent">Cost Equivalent</string>
     <string name="cost_per_mile" >"Cost Per Mile: "</string>
+    <string name="reset">Reset</string>
     <!-- End of Dennis's Strings -->
 </resources>
