@@ -34,9 +34,10 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@android:color/holo_green_light"
+                android:background="@drawable/button_bg"
                 android:onClick="gotoReport"
-                android:text="@string/see_report" />
+                android:text="@string/see_report"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused" />
 
             <Button
                 android:id="@+id/nearestChargingMenuButton"
@@ -45,9 +46,10 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@android:color/holo_green_light"
+                android:background="@drawable/button_bg"
                 android:onClick="gotoNearestCharging"
-                android:text="@string/nearest_charging_station" />
+                android:text="@string/nearest_charging_station"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused" />
 
         </LinearLayout>
 
@@ -64,9 +66,10 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@android:color/holo_green_light"
+                android:background="@drawable/button_bg"
                 android:onClick="gotoFillupLog"
-                android:text="@string/fuel_log" />
+                android:text="@string/fuel_log"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused" />
 
         </LinearLayout>
 

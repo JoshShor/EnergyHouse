@@ -36,7 +36,7 @@ public class TransportSetupActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         int savedVersionCode = prefs.getInt(PREF_VERSION_CODE_KEY, DOESNT_EXIST);
 
-        // Check for first run or upgrade
+        // Check for first run or upgrade //changed the !
         if (currentVersionCode == savedVersionCode) {
 
             Intent transportIntent = new Intent(this, TransportationActivity.class);
