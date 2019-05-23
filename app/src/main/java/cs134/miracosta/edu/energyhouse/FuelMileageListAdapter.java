@@ -9,12 +9,16 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 import cs134.miracosta.edu.energyhouse.model.FuelMileage;
 
 public class FuelMileageListAdapter extends ArrayAdapter<FuelMileage> {
 
+    private NumberFormat currency = NumberFormat.getCurrencyInstance(Locale.getDefault());
+    private NumberFormat decimal = NumberFormat.getNumberInstance(Locale.getDefault());
     private Context mContext;
     private List<FuelMileage> mFuelMileagesList;
     private int mResourceId;
@@ -65,9 +69,9 @@ public class FuelMileageListAdapter extends ArrayAdapter<FuelMileage> {
 
         // TODO (2): Set the text of each of the 3 views accordingly.
         fuelMileageListItemDateTextView.setText(selectedFuelMileage.getDateStr());
-        fuelMileageListItemOdometerTextView.setText(String.valueOf(selectedFuelMileage.getOdometerReading()));
-        fuelMileageListItemGallonsTextView.setText(String.valueOf(selectedFuelMileage.getFuelAmt()));
-        fuelMileageListItemTotalCostTextView.setText(String.valueOf(selectedFuelMileage.getTotalCostFillUp()));
+        fuelMileageListItemOdometerTextView.setText(decimal.format(selectedFuelMileage.getOdometerReading()));
+        fuelMileageListItemGallonsTextView.setText(decimal.format(selectedFuelMileage.getFuelAmt()));
+        fuelMileageListItemTotalCostTextView.setText(currency.format(selectedFuelMileage.getTotalCostFillUp()));
 
         // Sets the tag, so when user clicks a specific offering, we can respond to that object specifically.
         offeringListLinearLayout.setTag(selectedFuelMileage);

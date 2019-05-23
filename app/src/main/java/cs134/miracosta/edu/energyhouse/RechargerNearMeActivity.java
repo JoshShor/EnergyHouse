@@ -1,12 +1,14 @@
 package cs134.miracosta.edu.energyhouse;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +17,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,14 +37,26 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
+import cs134.miracosta.edu.energyhouse.model.ChargeLocation;
+import cs134.miracosta.edu.energyhouse.model.JSONLoader;
+
 
 public class RechargerNearMeActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, LocationListener, OnMapReadyCallback{
@@ -61,6 +76,12 @@ public class RechargerNearMeActivity extends AppCompatActivity implements Google
     private ArrayList<String> permissions = new ArrayList<>();
     // integer for permissions results request
     private static final int ALL_PERMISSIONS_RESULT = 1011;
+
+    private TextView testTextView;
+    private String json;
+    List<ChargeLocation> allChargingLocations;
+
+    ProgressDialog pd;
 
 
     @Override
@@ -164,9 +185,14 @@ public class RechargerNearMeActivity extends AppCompatActivity implements Google
             locationTv.setText("Latitude : " + latitude + "\nLongitude uh: " + longitude);
         }
 
-        //Load the google map
+//Get JSON information
+        new JsonTask().execute("https://api.openchargemap.io/v3/poi/?output=json&callback&verbose=false&latitude=" + latitude
+                + "&longitude=" + longitude + "&maxresults=10");
+
+//Load the google map
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapFragment);
         mapFragment.getMapAsync(this);
+
 
         startLocationUpdates();
     }
@@ -277,5 +303,94 @@ public class RechargerNearMeActivity extends AppCompatActivity implements Google
 //            position = new LatLng(location.getLatitude(), location.getLongitude());
 //            map.addMarker(new MarkerOptions().position(position).title(location.getName()));
 //        }
+    }
+
+    private class JsonTask extends AsyncTask<String, String, String> {
+
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            pd = new ProgressDialog(RechargerNearMeActivity.this);
+            pd.setMessage("Please wait");
+            pd.setCancelable(false);
+            pd.show();
+        }
+
+        protected String doInBackground(String... params) {
+
+            HttpURLConnection connection = null;
+            BufferedReader reader = null;
+
+            try {
+                URL url = new URL(params[0]);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+
+
+                InputStream stream = connection.getInputStream();
+
+                reader = new BufferedReader(new InputStreamReader(stream));
+
+                StringBuffer buffer = new StringBuffer();
+                String line = "";
+
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line+"\n");
+                    Log.d("Response: ", "> " + line);   //here u ll get whole response...... :-)
+
+                }
+
+                return buffer.toString();
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
+                try {
+                    if (reader != null) {
+                        reader.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if (pd.isShowing()) {
+                pd.dismiss();
+            }
+            json = "{\"location\": " + result;
+
+            testTextView = findViewById(R.id.testTextView);
+            testTextView.setMovementMethod(new ScrollingMovementMethod());
+            testTextView.setText(json);
+            String testString="";
+
+            try {
+                JSONObject jsonObject = new JSONObject(json);
+                allChargingLocations = JSONLoader.loadJSONFromHTTP(jsonObject);
+                for(ChargeLocation loc: allChargingLocations){
+                    testString += loc.toString() + "\n";
+                }
+
+                testTextView.setText(testString);
+
+            }catch(IOException e){
+                Log.e("RechargerNearMeActivity", "Error loading JSON data." + e.getMessage());
+            }catch(JSONException e){
+                Log.e("JSON exception:", e.getMessage());
+            }
+
+        }
+
     }
 }

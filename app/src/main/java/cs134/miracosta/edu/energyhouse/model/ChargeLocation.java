@@ -20,26 +20,24 @@ public class ChargeLocation implements Parcelable {
     private String mPhone;
     private double mLatitude;
     private double mLongitude;
+    private double mDistance;
 
-    public ChargeLocation(long id, String name, String address, String city, String state, String zipCode, String phone, double latitude, double longitude) {
+    public ChargeLocation(long id, String address, String city, String state, String zipCode, double latitude, double longitude, double distance) {
         mId = id;
-        mName = name;
         mAddress = address;
         mCity = city;
         mState = state;
         mZipCode = zipCode;
-        mPhone = phone;
         mLatitude = latitude;
         mLongitude = longitude;
+        mDistance = distance;
     }
 
-    public ChargeLocation(String name, String address, String city, String state, String zipCode, String phone, double latitude, double longitude) {
-        this(-1, name, address, city, state, zipCode, phone, latitude, longitude);
+    public ChargeLocation(String address, String city, String state, String zipCode, double latitude, double longitude, double distance) {
+        this(-1, address, city, state, zipCode, latitude, longitude, distance);
     }
 
     protected ChargeLocation(Parcel in) {
-        mId = in.readLong();
-        mName = in.readString();
         mAddress = in.readString();
         mCity = in.readString();
         mState = in.readString();
@@ -47,6 +45,7 @@ public class ChargeLocation implements Parcelable {
         mPhone = in.readString();
         mLatitude = in.readDouble();
         mLongitude = in.readDouble();
+        mDistance = in.readDouble();
     }
 
     public long getId() {
@@ -167,6 +166,7 @@ public class ChargeLocation implements Parcelable {
         parcel.writeString(mPhone);
         parcel.writeDouble(mLatitude);
         parcel.writeDouble(mLongitude);
+        parcel.writeDouble(mDistance);
     }
 
     public static final Creator<ChargeLocation> CREATOR = new Creator<ChargeLocation>() {
