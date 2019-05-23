@@ -9,9 +9,9 @@ import android.widget.Button;
 
 public class MenuActivity extends AppCompatActivity {
 
-    private Button solarButton;
+    private Button energyButton;
     private Button recycleButton;
-    private Button switchToTransport;
+    private Button transportButton;
 
 
     @Override
@@ -19,12 +19,14 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        solarButton = findViewById(R.id.solarButton);
+        energyButton = findViewById(R.id.energyButton);
+        recycleButton = findViewById(R.id.recycleButton);
+        transportButton = findViewById(R.id.transportButton);
     }
 
-    public void switchToSolar(View v){
-        Intent solarIntent = new Intent(this, EnergyActivity.class);
-        startActivity(solarIntent);
+    public void switchToEnergy(View v){
+        Intent energyIntent = new Intent(this, EnergyActivity.class);
+        startActivity(energyIntent);
     }
 
     //switchToRecycle

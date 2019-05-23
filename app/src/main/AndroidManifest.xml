@@ -13,6 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ApplianceActivity"></activity>
+        <activity android:name=".PowerEstimate" />
+        <activity android:name=".SolarActivity" />
         <!-- Dennis's Activities -->
         <activity android:name=".RecyclingActivity" />
         <activity android:name=".WhereToRecycleActivity" />

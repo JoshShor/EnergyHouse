@@ -6,17 +6,25 @@ public class Appliances {
     private String mName;
     private String mType;
     private double mPrice;
-    private double mPowerUse;
+    private double mWatts;
+    private double mhours;
+    private double mWattHour;
+    private double mTotalWH;
+    private double mKiloWattHourPerWeek;
+    private double mKiloWattHourPerMonth;
+    private int DAYS_OF_WEEK = 7;
+    private int DAYS_OF_MONTH = 30; //precise number is 30.4167 if you average out number of days in year/12
+
 
     public Appliances() {
     }
 
-    public Appliances(long ID, String name, String type, double price, double powerUse) {
+    public Appliances(long ID, String name, String type, double price, double wattHour) {
         mID = ID;
         mName = name;
         mType = type;
         mPrice = price;
-        mPowerUse = powerUse;
+        mWattHour = wattHour;
     }
 
     public Appliances(String name, String type, double price, double powerUse) {
@@ -39,8 +47,20 @@ public class Appliances {
         mPrice = price;
     }
 
-    public void setPowerUse(double powerUse) {
-        mPowerUse = powerUse;
+    public void setWattHour(double w, double h) {
+        mWattHour = mWatts*mhours;
+    }
+
+    public void setTotalWH(double total){
+        mTotalWH = total;
+    }
+
+    public void setEnergyPerWeek(double total){
+        mKiloWattHourPerWeek = (total/1000)*DAYS_OF_WEEK;
+    }
+
+    public void setEnergyPerMonth(double total){
+        mKiloWattHourPerMonth = (total/1000)*DAYS_OF_MONTH;
     }
 
     public long getID() {
@@ -59,8 +79,20 @@ public class Appliances {
         return mPrice;
     }
 
-    public double getPowerUse() {
-        return mPowerUse;
+    public double getWattHour() {
+        return mWattHour;
+    }
+
+    public double getTotalWH(){
+        return mTotalWH;
+    }
+
+    public double getEnergyPerWeek(){
+         return mKiloWattHourPerWeek;
+    }
+
+    public double getEnergyPerMonth(){
+        return mKiloWattHourPerMonth;
     }
 
     @Override
@@ -70,7 +102,7 @@ public class Appliances {
                 ", mName='" + mName + '\'' +
                 ", mType='" + mType + '\'' +
                 ", mPrice=" + mPrice +
-                ", mPowerUse=" + mPowerUse +
+                ", mWattHour=" + mWattHour +
                 '}';
     }
 }
