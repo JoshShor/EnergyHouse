@@ -45,16 +45,6 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/numberOfApplianceTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/numberOfApplianceHint"
-            android:textAlignment="center"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <TextView
             android:id="@+id/powerConsumptionTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -77,96 +67,6 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textViewIncandescent"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/appliance_light_incandescent"
-            android:textAlignment="center"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/incNumberEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number"
-            android:textSize="8sp" />
-
-        <EditText
-            android:id="@+id/incPowerEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:textSize="8sp" />
-
-        <EditText
-            android:id="@+id/incHoursEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:textSize="8sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textViewFluorescent"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/appliance_light_fluorescent"
-            android:textAlignment="center"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/fluorNumberEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number"
-            android:textSize="8sp" />
-
-        <EditText
-            android:id="@+id/fluorPowerEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:textSize="8sp" />
-
-        <EditText
-            android:id="@+id/fluorHoursEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:textSize="8sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="horizontal">
@@ -176,19 +76,10 @@
             android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/appliance_light_led"
+            android:text="@string/applianceLight"
             android:textAlignment="center"
             android:textSize="8sp"
             android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/ledNumberEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number"
-            android:textSize="8sp" />
 
         <EditText
             android:id="@+id/ledPowerEditText"
@@ -227,15 +118,6 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/tvNumberEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number"
-            android:textSize="8sp" />
-
-        <EditText
             android:id="@+id/tvPowerEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -262,51 +144,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textViewFan"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/applianceFan"
-            android:textAlignment="center"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/fanNumberEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number"
-            android:textSize="8sp" />
-
-        <EditText
-            android:id="@+id/fanPowerEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:textSize="8sp" />
-
-        <EditText
-            android:id="@+id/fanHoursEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:textSize="8sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <TextView
             android:id="@+id/textViewAC"
             android:layout_width="75dp"
             android:layout_height="wrap_content"
@@ -315,15 +152,6 @@
             android:textAlignment="center"
             android:textSize="8sp"
             android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/acNumberEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number"
-            android:textSize="8sp" />
 
         <EditText
             android:id="@+id/acPowerEditText"
@@ -362,15 +190,6 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/heaterNumberEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number"
-            android:textSize="8sp" />
-
-        <EditText
             android:id="@+id/heaterPowerEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -407,15 +226,6 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/microwaveNumberEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number"
-            android:textSize="8sp" />
-
-        <EditText
             android:id="@+id/microwavePowerEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -442,51 +252,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textViewKitchenStove"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/applianceKitchenStove"
-            android:textAlignment="center"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/stoveNumberEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number"
-            android:textSize="8sp" />
-
-        <EditText
-            android:id="@+id/stovePowerEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:textSize="8sp" />
-
-        <EditText
-            android:id="@+id/stoveHoursEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:textSize="8sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <TextView
             android:id="@+id/textViewKitchenOven"
             android:layout_width="75dp"
             android:layout_height="wrap_content"
@@ -495,15 +260,6 @@
             android:textAlignment="center"
             android:textSize="8sp"
             android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/ovenNumberEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number"
-            android:textSize="8sp" />
 
         <EditText
             android:id="@+id/ovenPowerEditText"
@@ -542,15 +298,6 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/refrigeratorNumberEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number"
-            android:textSize="8sp" />
-
-        <EditText
             android:id="@+id/refrigeratorPowerEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -587,15 +334,6 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/dishwasherNumberEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number"
-            android:textSize="8sp" />
-
-        <EditText
             android:id="@+id/dishwasherPowerEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -622,51 +360,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textViewElectricWaterHeater"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/applianceElectricWaterHeater"
-            android:textAlignment="center"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/h20HeaterNumberEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number"
-            android:textSize="8sp" />
-
-        <EditText
-            android:id="@+id/electricWaterHeaterPowerEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:textSize="8sp" />
-
-        <EditText
-            android:id="@+id/waterHeaterHoursEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:textSize="8sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <TextView
             android:id="@+id/textViewWashingMachine"
             android:layout_width="75dp"
             android:layout_height="wrap_content"
@@ -675,15 +368,6 @@
             android:textAlignment="center"
             android:textSize="8sp"
             android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/washerNumberEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number"
-            android:textSize="8sp" />
 
         <EditText
             android:id="@+id/washingMachinePowerEditText"
@@ -722,15 +406,6 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/dryerNumberEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number"
-            android:textSize="8sp" />
-
-        <EditText
             android:id="@+id/dryerPowerEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -750,56 +425,12 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textViewOther"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/applianceOther"
-            android:textAlignment="center"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/otherNumberEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number"
-            android:textSize="8sp" />
-
-        <EditText
-            android:id="@+id/otherPowerEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:textSize="8sp" />
-
-        <EditText
-            android:id="@+id/otherHoursEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:textSize="8sp" />
-
-    </LinearLayout>
-
     <Button
         android:id="@+id/energyUsageCalcButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
+        android:onClick="computeEnergyConsumed"
         android:text="@string/calculateTotalButton" />
 
 </LinearLayout>
