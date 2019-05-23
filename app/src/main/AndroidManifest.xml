@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cs134.miracosta.edu.energyhouse">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,6 +16,21 @@
         <activity android:name=".ApplianceActivity"></activity>
         <activity android:name=".PowerEstimate" />
         <activity android:name=".SolarActivity" />
+        <!-- Dennis's Activities -->
+        <activity android:name=".RecyclingActivity" />
+        <activity android:name=".WhereToRecycleActivity" />
+        <activity android:name=".WhatGoesWhereActivity" />
+        <activity android:name=".CalculateRecyclablesActivity" />
+        <activity android:name=".ImpactActivity" />
+        <!-- End of Dennis's Activities -->
+        <!-- Brian's Activities -->
+        <activity android:name=".RechargerNearMeActivity" />
+        <activity android:name=".FuelMileageDataEntryActivity" />
+        <activity android:name=".TransportSetupActivity" />
+        <activity android:name=".TransportReportActivity" />
+        <activity android:name=".TransportationActivity"/>
+        <!-- End of Brian's Activities -->
+        <activity android:name=".RoomListDetails" />
         <activity android:name=".MenuActivity" />
         <activity android:name=".EnergyActivity" />
         <activity android:name=".SplashActivity">
@@ -21,6 +40,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDvJk2pjW871r2KAnTWR34J2p3tyQHLeZU"/>
     </application>
 
 </manifest>

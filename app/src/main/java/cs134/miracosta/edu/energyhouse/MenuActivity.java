@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.Button;
 
 public class MenuActivity extends AppCompatActivity {
@@ -11,6 +12,7 @@ public class MenuActivity extends AppCompatActivity {
     private Button energyButton;
     private Button recycleButton;
     private Button transportButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +31,14 @@ public class MenuActivity extends AppCompatActivity {
 
     //switchToRecycle
     public void switchToRecycle(View v){
-        Intent solarIntent = new Intent(this, EnergyActivity.class);
-        startActivity(solarIntent);
+        Intent recyclingIntent = new Intent(this, RecyclingActivity.class);
+        startActivity(recyclingIntent);
     }
 
     //switchToTransport
     public void switchToTransport(View v){
-        Intent solarIntent = new Intent(this, EnergyActivity.class);
-        startActivity(solarIntent);
+        Intent transportIntent = new Intent(this, TransportSetupActivity.class);
+        startActivity(transportIntent);
     }
 
 }
