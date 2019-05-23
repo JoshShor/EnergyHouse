@@ -304,7 +304,7 @@ public class WhereToRecycleActivity extends AppCompatActivity implements OnMapRe
 
             map.addMarker(new MarkerOptions()
                     .position(position)
-                    .title(location.getInfo()));
+                    .title(location.getName()));
         }
     }
 }
