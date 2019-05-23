@@ -3,6 +3,8 @@ package cs134.miracosta.edu.energyhouse;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -48,6 +50,8 @@ public class FuelMileageDataEntryActivity extends AppCompatActivity {
         entryList = db.getAllMilageLogs();
         entryListAdapter = new FuelMileageListAdapter(this, R.layout.fuel_log_list_item, entryList);
         entryListView.setAdapter(entryListAdapter);
+
+        priceOfFuelEditText = findViewById(R.id.pricePerUnitEditText);
 
         db.close();
 

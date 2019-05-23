@@ -67,4 +67,5 @@
     <string name="what_goes_where">Qua va Donde?</string>
     <string name="what_goes_where_instructions">Porfavor eligir algo de el Siguiente por mas informacion.</string>
     <string name="where_to_recycle">Donde Recyclar?</string>
+    <string name="reset">Reset</string>
 </resources>
