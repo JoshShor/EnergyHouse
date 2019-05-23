@@ -27,6 +27,10 @@ public class TransportReportActivity extends AppCompatActivity {
     private TextView toDateTextView;
     private TextView totalKWTextView;
     private TextView totalDistanceTextView;
+    private TextView distanceEquivalentTextView;
+    private TextView costEquivalentTextView;
+    private TextView costPerDistanceTextView;
+    private TextView costPerDistanceGasTextView;
 
     private double totalCost=0;
     private double totalMiles = 0;
@@ -36,6 +40,11 @@ public class TransportReportActivity extends AppCompatActivity {
     private String sDate2;
     private double totalKW = 0;
     private double totalDistance = 0;
+    private double distanceEquivalent = 0;
+    private double costEquivalent = 0;
+    private double priceOfElectricity = .245;
+    private double costPerDistanceElec = 0;
+    private double costPerDistanceGas = 0;
 
 
 
@@ -50,6 +59,10 @@ public class TransportReportActivity extends AppCompatActivity {
         toDateTextView = findViewById(R.id.toDateTextView);
         totalKWTextView = findViewById(R.id.totalKWUsedTextView);
         totalDistanceTextView = findViewById(R.id.totalDistanceDrivenTextView);
+        distanceEquivalentTextView = findViewById(R.id.distanceEquivalentTextView);
+        costEquivalentTextView = findViewById(R.id.costEquivalentTextView);
+        costPerDistanceTextView = findViewById(R.id.costPerDistanceTextView);
+        costPerDistanceGasTextView = findViewById(R.id.costPerMileGasTextView);
 
 
         //Get all the data from the Database and put it into a List
@@ -66,6 +79,10 @@ public class TransportReportActivity extends AppCompatActivity {
         totalFuelTextView.setText(decimal.format(totalFuel));
         totalKWTextView.setText(decimal.format(totalKW));
         totalDistanceTextView.setText(decimal.format(totalDistance));
+        distanceEquivalentTextView.setText(decimal.format(distanceEquivalent));
+        costEquivalentTextView.setText(currency.format(costEquivalent));
+        costPerDistanceTextView.setText(currency.format(costPerDistanceElec) + "/Mile");
+        costPerDistanceGasTextView.setText(currency.format(costPerDistanceGas) + "/Mile");
     }
 
     public void calculateKW(){
@@ -88,6 +105,8 @@ public class TransportReportActivity extends AppCompatActivity {
         totalCost=0;
         sDate1 = allFuelLogData.get(0).getDateStr();
         sDate2 = allFuelLogData.get(allFuelLogData.size() - 1).getDateStr();
+        double teslaMilesperKWh = 3.88;
+
         try {
             Date date1 = new SimpleDateFormat("MMMM, dd yyyy").parse(sDate1);
             Date date2 = new SimpleDateFormat("MMMM, dd yyyy").parse(sDate2);
@@ -102,6 +121,22 @@ public class TransportReportActivity extends AppCompatActivity {
 
         totalKW = totalFuel * 33.45;
         totalDistance = (allFuelLogData.get(allFuelLogData.size()-1).getOdometerReading()) - (allFuelLogData.get(0).getOdometerReading());
+        distanceEquivalent = 3.88 * totalKW;
+        costEquivalent = totalKW * priceOfElectricity;
+        if(distanceEquivalent ==0) {
+            distanceEquivalent = 1;
+            costPerDistanceElec = costEquivalent / distanceEquivalent;
+        }else{
+            costPerDistanceElec = costEquivalent / distanceEquivalent;
+        }
+        if(totalCost == 0){
+            totalCost = 1;
+            costPerDistanceGas = totalCost/totalDistance;
+        }else{
+            costPerDistanceGas = totalCost/totalDistance;
+        }
+
+
     }
 
 
