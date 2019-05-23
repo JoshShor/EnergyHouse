@@ -14,13 +14,25 @@ import java.util.List;
 
 import cs134.miracosta.edu.energyhouse.model.ImpactItem;
 
-
+/**
+ * ImpactItemListAdapter.java - Adapter for the list view in ImpactActivity
+ *
+ * @author Dennis La
+ * @version 1.0
+ */
 public class ImpactItemListAdapter extends ArrayAdapter<ImpactItem>
 {
     private Context mContext;
     private List<ImpactItem> mImpactItemsList = new ArrayList<>();
     private int mResourceId;
 
+    /**
+     * Constructor
+     *
+     * @param c context
+     * @param rId id of list item resource layout
+     * @param impactItems list of items
+     */
     public ImpactItemListAdapter(Context c, int rId, List<ImpactItem> impactItems) {
         super(c, rId, impactItems);
         mContext = c;
@@ -28,6 +40,14 @@ public class ImpactItemListAdapter extends ArrayAdapter<ImpactItem>
         mImpactItemsList = impactItems;
     }
 
+    /**
+     * Inflates the list item view
+     *
+     * @param pos position of list item
+     * @param convertView
+     * @param parent
+     * @return the inflated list item view
+     */
     @Override
     public View getView(int pos, View convertView, ViewGroup parent)
     {

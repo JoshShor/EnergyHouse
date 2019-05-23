@@ -11,7 +11,12 @@ import java.util.Locale;
 
 import cs134.miracosta.edu.energyhouse.model.RecyclingCRV;
 
-
+/**
+ * CalculateRecyclablesActivity.java - Lets use calculate CRV
+ *
+ * @author Dennis La
+ * @version 1.0
+ */
 public class CalculateRecyclablesActivity extends AppCompatActivity {
 
     private EditText aluminumEditText;
@@ -23,6 +28,11 @@ public class CalculateRecyclablesActivity extends AppCompatActivity {
 
     private NumberFormat mNumberFormat;
 
+    /**
+     * Creates the activity
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +48,11 @@ public class CalculateRecyclablesActivity extends AppCompatActivity {
         mNumberFormat = NumberFormat.getCurrencyInstance(Locale.getDefault());
     }
 
+    /**
+     * Calculates the CRV from data in the edit texts and displays the information
+     *
+     * @param v the calculate button
+     */
     public void calcValue(View v)
     {
         double aluminum = aluminumEditText.getText().toString().equals("") ?

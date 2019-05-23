@@ -13,13 +13,25 @@ import java.util.List;
 
 import cs134.miracosta.edu.energyhouse.model.RecyclingTypes;
 
-
+/**
+ * RecyclingTypesListAdapter.java - Adapter for the list view in WhatGoesWhereActivity
+ *
+ * @author Dennis La
+ * @version 1.0
+ */
 public class RecyclingTypesListAdapter extends ArrayAdapter<RecyclingTypes>
 {
     private Context mContext;
     private int mResourceId;
     private List<RecyclingTypes> mAllRecyclingTypes;
 
+    /**
+     * Constructor
+     *
+     * @param context context
+     * @param resource id of list item resource layout
+     * @param objects list of items
+     */
     public RecyclingTypesListAdapter(Context context, int resource, List<RecyclingTypes> objects) {
         super(context, resource, objects);
 
@@ -29,6 +41,14 @@ public class RecyclingTypesListAdapter extends ArrayAdapter<RecyclingTypes>
 
     }
 
+    /**
+     * Inflates the list item view
+     *
+     * @param pos position of list item
+     * @param convertView
+     * @param parent
+     * @return the inflated list item view
+     */
     @Override
     public View getView(int pos, View convertView, ViewGroup parent)
     {

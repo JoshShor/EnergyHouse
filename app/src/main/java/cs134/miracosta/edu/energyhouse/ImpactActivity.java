@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,7 +17,12 @@ import java.util.List;
 import cs134.miracosta.edu.energyhouse.model.DBHelper;
 import cs134.miracosta.edu.energyhouse.model.ImpactItem;
 
-
+/**
+ * ImpactActivity.java - Activity to let user record their impact on environment
+ *
+ * @author Dennis La
+ * @version 1.0
+ */
 public class ImpactActivity extends AppCompatActivity {
 
     private DBHelper mImpactDBHelper;
@@ -35,12 +43,35 @@ public class ImpactActivity extends AppCompatActivity {
     private TextView hrsElecTextView;
     private TextView galWaterTextView;
 
-    ListView impactLogListView;
+    private ListView impactLogListView;
 
+    private ImageView treeImageView;
+    private ImageView oilImageView;
+    private ImageView elecImageView;
+    private ImageView waterImageView;
+    private Animation fadeInAnimation;
+
+    /**
+     * Creates the activity and initializes the textviews with data from the database
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_impact);
+
+        treeImageView = findViewById(R.id.treeImageView);
+        oilImageView = findViewById(R.id.oilImageView);
+        elecImageView = findViewById(R.id.elecImageView);
+        waterImageView = findViewById(R.id.waterImageView);
+
+        fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in_anim);
+
+        treeImageView.startAnimation(fadeInAnimation);
+        oilImageView.startAnimation(fadeInAnimation);
+        elecImageView.startAnimation(fadeInAnimation);
+        waterImageView.startAnimation(fadeInAnimation);
 
         mImpactDBHelper = new DBHelper(this);
         mImpactItemList = mImpactDBHelper.getAllImpactItems();
@@ -62,6 +93,9 @@ public class ImpactActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Initializes the cumulative total for each ImpactItem
+     */
     private void initializeTotals()
     {
         if(!mImpactItemList.isEmpty())
@@ -76,6 +110,11 @@ public class ImpactActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Adds an item to the item log and database and updates the totals
+     *
+     * @param v add log button
+     */
     public void addToLog(View v)
     {
         if(TextUtils.isEmpty(poundsPaperEditText.getText()) || TextUtils.isEmpty(poundsMixedEditText.getText()))
@@ -97,6 +136,11 @@ public class ImpactActivity extends AppCompatActivity {
         addToTotals(impactItem);
     }
 
+    /**
+     * Helper method to add to the totals
+     *
+     * @param newImpactItem the new impact item
+     */
     private void addToTotals(ImpactItem newImpactItem)
     {
         mNumTrees += newImpactItem.calcNumTreesSaved();
@@ -107,6 +151,11 @@ public class ImpactActivity extends AppCompatActivity {
         setTextViewCounters();
     }
 
+    /**
+     * Clears the log from the database and list view, resets the totals
+     *
+     * @param v the clear log button
+     */
     public void clearLog(View v)
     {
         mImpactDBHelper.deleteAllImpactItems();
@@ -125,6 +174,9 @@ public class ImpactActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Helper method for setting the text views
+     */
     private void setTextViewCounters()
     {
         numTreesTextView.setText(String.valueOf(Math.round(mNumTrees)));
