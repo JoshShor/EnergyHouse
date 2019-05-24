@@ -12,7 +12,7 @@
         android:id="@+id/titleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/menu"
+        android:text="@string/mainmenu"
         android:textAlignment="center"
         android:textSize="30sp"
         android:textStyle="bold" />
