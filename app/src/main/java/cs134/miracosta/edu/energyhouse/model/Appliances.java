@@ -7,7 +7,7 @@ public class Appliances {
     private String mType;
     private double mPrice;
     private double mWatts;
-    private double mhours;
+    private double mHours;
     private double mWattHour;
     private double mTotalWH;
     private double mKiloWattHourPerWeek;
@@ -47,8 +47,16 @@ public class Appliances {
         mPrice = price;
     }
 
+    public void setWatts(double watts) {
+        mWatts = watts;
+    }
+
+    public void setHours(double hours) {
+        mHours = hours;
+    }
+
     public void setWattHour(double w, double h) {
-        mWattHour = mWatts*mhours;
+        mWattHour = mWatts*mHours;
     }
 
     public void setTotalWH(double total){

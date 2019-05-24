@@ -3,6 +3,7 @@ package cs134.miracosta.edu.energyhouse;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +33,8 @@ public class ApplianceActivity extends AppCompatActivity {
     private EditText dryerHoursEditText;
     private Button energyUsageCalcButton;
 
+    double wats = 0;
+    double hrs = 0;
     double wattHour = 0;
     double totalEnergy = 0;
     double weekEnergy;
@@ -81,7 +84,7 @@ public class ApplianceActivity extends AppCompatActivity {
 
     }
 
-    private void computeEnergyConsumed(View v){
+    public void computeEnergyConsumed(View v){
 
         String lightPowerStr = ledPowerEditText.getText().toString();
         String lightHoursStr = ledHoursEditText.getText().toString();
@@ -104,37 +107,55 @@ public class ApplianceActivity extends AppCompatActivity {
         String dryerPowerStr = dryerPowerEditText.getText().toString();
         String dryerHoursStr = dryerHoursEditText.getText().toString();
 
-
+        appliance.setWatts(Double.parseDouble(lightPowerStr));
+        appliance.setHours(Double.parseDouble(lightHoursStr));
         appliance.setWattHour(Double.parseDouble(lightPowerStr), Double.parseDouble(lightHoursStr));
         totalEnergy += appliance.getWattHour();
+        Log.e("Lights outs", "Lights here " + totalEnergy);
+        Log.e("Lights outs", lightPowerStr);
 
-        appliance.setWattHour(Double.parseDouble(lightPowerStr), Double.parseDouble(lightHoursStr));
-        totalEnergy += appliance.getWattHour();
-
+        appliance.setWatts(Double.parseDouble(tvPowerStr));
+        appliance.setHours(Double.parseDouble(tvHoursStr));
         appliance.setWattHour(Double.parseDouble(tvPowerStr), Double.parseDouble(tvHoursStr));
         totalEnergy += appliance.getWattHour();
 
+        appliance.setWatts(Double.parseDouble(acPowerStr));
+        appliance.setHours(Double.parseDouble(acHoursStr));
         appliance.setWattHour(Double.parseDouble(acPowerStr), Double.parseDouble(acHoursStr));
         totalEnergy += appliance.getWattHour();
 
+        appliance.setWatts(Double.parseDouble(heaterPowerStr));
+        appliance.setHours(Double.parseDouble(heaterHoursStr));
         appliance.setWattHour(Double.parseDouble(heaterPowerStr), Double.parseDouble(heaterHoursStr));
         totalEnergy += appliance.getWattHour();
 
+        appliance.setWatts(Double.parseDouble(microwavePowerStr));
+        appliance.setHours(Double.parseDouble(microwaveHoursStr));
         appliance.setWattHour(Double.parseDouble(microwavePowerStr), Double.parseDouble(microwaveHoursStr));
         totalEnergy += appliance.getWattHour();
 
+        appliance.setWatts(Double.parseDouble(ovenPowerStr));
+        appliance.setHours(Double.parseDouble(ovenHoursStr));
         appliance.setWattHour(Double.parseDouble(ovenPowerStr), Double.parseDouble(ovenHoursStr));
         totalEnergy += appliance.getWattHour();
 
+        appliance.setWatts(Double.parseDouble(refrigeratorPowerStr));
+        appliance.setHours(Double.parseDouble(refrigeratorHoursStr));
         appliance.setWattHour(Double.parseDouble(refrigeratorPowerStr), Double.parseDouble(refrigeratorHoursStr));
         totalEnergy += appliance.getWattHour();
 
+        appliance.setWatts(Double.parseDouble(dishwasherPowerStr));
+        appliance.setHours(Double.parseDouble(dishwasherHoursStr));
         appliance.setWattHour(Double.parseDouble(dishwasherPowerStr), Double.parseDouble(dishwasherHoursStr));
         totalEnergy += appliance.getWattHour();
 
+        appliance.setWatts(Double.parseDouble(washingMachinePowerStr));
+        appliance.setHours(Double.parseDouble(washingMachineHoursStr));
         appliance.setWattHour(Double.parseDouble(washingMachinePowerStr), Double.parseDouble(washingMachineHoursStr));
         totalEnergy += appliance.getWattHour();
 
+        appliance.setWatts(Double.parseDouble(dryerPowerStr));
+        appliance.setHours(Double.parseDouble(dryerHoursStr));
         appliance.setWattHour(Double.parseDouble(dryerPowerStr), Double.parseDouble(dryerHoursStr));
         totalEnergy += appliance.getWattHour();
 
@@ -148,13 +169,15 @@ public class ApplianceActivity extends AppCompatActivity {
         //create new intent to share data between activities and switch to them
         Intent estimateIntent = new Intent(this, PowerEstimate.class);
 
-        String dailyEnergyUseString = (totalEnergy) + "wattHours/Day";
-        String weeklyEnergyUseString = weekEnergy + "kWh/week";
-        String monthlyEnergyUseString = monthEnergy + "kWh/month";
+        String dailyEnergyUseString = (totalEnergy) + " wattHours/Day";
+        String weeklyEnergyUseString = weekEnergy + " kWh/week";
+        String monthlyEnergyUseString = monthEnergy + " kWh/month";
 
         estimateIntent.putExtra("DailyNRG", dailyEnergyUseString);
         estimateIntent.putExtra("WeeklyNRG", weeklyEnergyUseString);
         estimateIntent.putExtra("MonthlyNRG", monthlyEnergyUseString);
+
+        startActivity(estimateIntent);
 
 
 
