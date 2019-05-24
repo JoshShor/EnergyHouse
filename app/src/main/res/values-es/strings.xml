@@ -22,6 +22,7 @@
     <string name ="goToSolarEst"> Calcular estimación para energía solar</string>
     <string name="mainmenu">CASA DE ENERGÍA Menú Principal</string>
     <string name ="goToCalcEnergy"> Calcular el uso de energía de los electrodomésticos </string>
+    <string name="logoShake">Agitar la imagen</string>
     <string name="solarActivityHeader">Seleccione el tipo de célula solar e ingrese la cantidad de consumo de energía para obtener la estimación</string>
     <string name="applianceLight">bombillas</string>
     <string name="applianceTV">Televisión</string>
