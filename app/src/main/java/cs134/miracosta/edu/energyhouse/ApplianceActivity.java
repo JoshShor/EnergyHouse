@@ -111,8 +111,8 @@ public class ApplianceActivity extends AppCompatActivity {
         appliance.setHours(Double.parseDouble(lightHoursStr));
         appliance.setWattHour(Double.parseDouble(lightPowerStr), Double.parseDouble(lightHoursStr));
         totalEnergy += appliance.getWattHour();
-        Log.e("Lights outs", "Lights here " + totalEnergy);
-        Log.e("Lights outs", lightPowerStr);
+        //Log.e("Lights outs", "Lights here " + totalEnergy);
+        //Log.e("Lights outs", lightPowerStr);
 
         appliance.setWatts(Double.parseDouble(tvPowerStr));
         appliance.setHours(Double.parseDouble(tvHoursStr));

@@ -32,12 +32,12 @@
 
         <Button
             android:id="@+id/applianceButton"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/bulb"
-            android:text="@string/goToCalcEnergy"
             android:onClick="switchToAppliance"
+            android:text="@string/goToCalcEnergy"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -48,13 +48,19 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/solarbutton"
-            android:text="@string/goToSolarEst"
             android:onClick="switchToSolar"
+            android:text="@string/goToSolarEst"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
 
     <ImageView
         android:id="@+id/imageView3"
