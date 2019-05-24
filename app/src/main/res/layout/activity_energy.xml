@@ -57,15 +57,17 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/shakeAnimButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:onClick="toggleShakeAnim"
+        android:text="@string/logoShake" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/eHLogoImageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
         app:srcCompat="@drawable/eh_logo" />
 
 </LinearLayout>

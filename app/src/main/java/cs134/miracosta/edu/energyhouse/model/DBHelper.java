@@ -30,13 +30,14 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String IMPACT_TABLE = "ImpactItems";
     private static final String RECYCLING_LOCATIONS_TABLE = "Recycling_Locations";
     //End Dennis's Table**********************************************************
-  
-  //TASK: DEFINE THE FIELDS (COLUMN NAMES) FOR THE SOLAR TABLE
+
     private static final String SOLAR_TABLE = "Solar";
-    private static final String COURSES_KEY_FIELD_ID = "_id";
-    private static final String FIELD_ALPHA = "alpha";
-    private static final String FIELD_NUMBER = "number";
-    private static final String FIELD_TITLE = "title";
+  //TASK: DEFINE THE FIELDS (COLUMN NAMES) FOR THE SOLAR TABLE
+    private static final String SOLAR_KEY_FIELD_ID = "_id";
+    private static final String SOLAR_PANEL_NAME = "panel";
+    private static final String SOLAR_PANEL_COST = "costs";
+    private static final String SOLAR_PANEL_WATTAGE = "watts";
+    private static final String SOLAR_PANEL_SQFT = "SqFootage";
 
     //Dennis's Fields**********************************************************
     private static final String KEY_IMPACT_FIELD_ID = "_id";
@@ -129,6 +130,16 @@ public class DBHelper extends SQLiteOpenHelper {
         database.execSQL(createQuery);
 
         //End Dennis's Table onCreate**********************************************************
+
+        //Creation of the table for solar panels
+        createQuery = "CREATE TABLE IF NOT EXISTS " + SOLAR_TABLE + "("
+                + SOLAR_KEY_FIELD_ID + " INTEGER PRIMARY KEY, "
+                + SOLAR_PANEL_NAME + " TEXT, "
+                + SOLAR_PANEL_COST + " DOUBLE, "
+                + SOLAR_PANEL_WATTAGE + " DOUBLE, "
+                + SOLAR_PANEL_SQFT + " DOUBLE" + ")";
+        database.execSQL(createQuery);
+
     }
 
     /**
@@ -149,6 +160,7 @@ public class DBHelper extends SQLiteOpenHelper {
         database.execSQL("DROP TABLE IF EXISTS " + IMPACT_TABLE);
         database.execSQL("DROP TABLE IF EXISTS " + RECYCLING_LOCATIONS_TABLE);
         //End Dennis's Table onUpgrade**********************************************************
+        database.execSQL("DROP TABLE IF EXISTS " + SOLAR_TABLE);
 
         onCreate(database);
     }
