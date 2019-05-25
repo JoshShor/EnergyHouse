@@ -601,6 +601,119 @@ public class DBHelper extends SQLiteOpenHelper {
         // CLOSE THE DATABASE CONNECTION
         db.close();
     }
+    public List<SolarPanels> getAllSolarPanels() {
+        ArrayList<SolarPanels> panelList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                SOLAR_TABLE,
+                new String[]{SOLAR_KEY_FIELD_ID, SOLAR_PANEL_NAME,
+                        SOLAR_PANEL_COST, SOLAR_PANEL_WATTAGE, SOLAR_PANEL_SQFT},
+                null,
+                null,
+                null, null, null, null);
 
+        //COLLECT EACH ROW IN THE TABLE
+        if (cursor.moveToFirst()) {
+            do {
+                SolarPanels panel =
+                        new SolarPanels(cursor.getLong(0),
+                                cursor.getString(1),
+                                cursor.getDouble(2),
+                                cursor.getDouble(3),
+                                cursor.getDouble(4));
+                panelList.add(panel);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return panelList;
+    }
+    /**
+     * Delete a recycling location in the db
+     *
+     * @param panels the recycling location to delete
+     */
+    public void deleteSolarPanels(SolarPanels panels) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // DELETE THE TABLE ROW
+        db.delete(SOLAR_TABLE, SOLAR_KEY_FIELD_ID + " = ?",
+                new String[]{String.valueOf(panels.getId())});
+        db.close();
+    }
+    /**
+     * Delete all panels in the db
+     */
+    public void deleteAllSolarPanels() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(SOLAR_TABLE, null, null);
+        db.close();
+    }
+    /**
+     * Get a solarpanels from the db
+     *
+     * @param id the id of the recycling location
+     * @return solar panels
+     */
+    public SolarPanels getSolarPanels(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                SOLAR_TABLE,
+                new String[]{SOLAR_KEY_FIELD_ID, SOLAR_PANEL_NAME,
+                        SOLAR_PANEL_COST, SOLAR_PANEL_WATTAGE, SOLAR_PANEL_SQFT},
+                SOLAR_KEY_FIELD_ID + "=?",
+                new String[]{String.valueOf(id)},
+                null, null, null, null);
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        SolarPanels panels =
+                new SolarPanels(cursor.getLong(0),
+                        cursor.getString(1),
+                        cursor.getDouble(2),
+                        cursor.getDouble(3),
+                        cursor.getDouble(4));
+        cursor.close();
+        db.close();
+        return panels;
+    }
+    /**
+     * Imports solarpanel data from CSV into the db
+     *
+     * @param csvFileName the csv file name
+     * @return whether or not the operation was successful
+     */
+    public boolean importSolarPanelsFromCSV(String csvFileName) {
+        AssetManager manager = mContext.getAssets();
+        InputStream inStream;
+        try {
+            inStream = manager.open(csvFileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        BufferedReader buffer = new BufferedReader(new InputStreamReader(inStream));
+        String line;
+        try {
+            while ((line = buffer.readLine()) != null) {
+                String[] fields = line.split(",");
+                if (fields.length != 9) {
+                    Log.d("Solar Panels", "Skipping Bad CSV Row: " + Arrays.toString(fields));
+                    continue;
+                }
+                long id = Long.parseLong(fields[0].trim());
+                String name = fields[1].trim();
+                double costs = Double.parseDouble(fields[2].trim());
+                double watts = Double.parseDouble(fields[3].trim());
+                double sqft = Double.parseDouble(fields[4].trim());
+                addSolarPanels(new SolarPanels(id, name, costs, watts, sqft));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }
-
