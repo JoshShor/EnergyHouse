@@ -32,12 +32,19 @@ public class DBHelper extends SQLiteOpenHelper {
     //End Dennis's Table**********************************************************
 
     private static final String SOLAR_TABLE = "Solar";
+    private static final String APPLIANCE_TABLE = "Appliances";
   //TASK: DEFINE THE FIELDS (COLUMN NAMES) FOR THE SOLAR TABLE
     private static final String SOLAR_KEY_FIELD_ID = "_id";
     private static final String SOLAR_PANEL_NAME = "panel";
     private static final String SOLAR_PANEL_COST = "costs";
     private static final String SOLAR_PANEL_WATTAGE = "watts";
     private static final String SOLAR_PANEL_SQFT = "SqFootage";
+
+    private static final String APPLIANCE_ID = "_id";
+    private static final String APPLIANCE_NAME = "name";
+    private static final String APPLIANCE_COST = "costs";
+    private static final String APPLIANCE_WATTAGE = "watts";
+    private static final String APPLIANCE_AVAILAILBITY = "whereToBuy";
 
     //Dennis's Fields**********************************************************
     private static final String KEY_IMPACT_FIELD_ID = "_id";
@@ -138,6 +145,15 @@ public class DBHelper extends SQLiteOpenHelper {
                 + SOLAR_PANEL_COST + " DOUBLE, "
                 + SOLAR_PANEL_WATTAGE + " DOUBLE, "
                 + SOLAR_PANEL_SQFT + " DOUBLE" + ")";
+        database.execSQL(createQuery);
+
+        //Creation of the table for Appliances
+        createQuery = "CREATE TABLE IF NOT EXISTS " + APPLIANCE_TABLE + "("
+                + APPLIANCE_ID + " INTEGER PRIMARY KEY, "
+                + APPLIANCE_NAME + " TEXT, "
+                + APPLIANCE_COST + " TEXT, "
+                + APPLIANCE_WATTAGE + " TEXT, "
+                + APPLIANCE_AVAILAILBITY + " TEXT" + ")";
         database.execSQL(createQuery);
 
     }
@@ -566,5 +582,25 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     //End Dennis's DBHelper methods**********************************************************
+
+    /**
+     * Add solar panels to the database
+     * @param panels
+     */
+    public void addSolarPanels(SolarPanels panels) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(SOLAR_PANEL_NAME, panels.getName());
+        values.put(SOLAR_PANEL_COST, panels.getCosts());
+        values.put(SOLAR_PANEL_WATTAGE, panels.getWatts());
+        values.put(SOLAR_PANEL_SQFT, panels.getSqft());
+
+        long id = db.insert(SOLAR_TABLE, null, values);
+        panels.setId(id);
+        // CLOSE THE DATABASE CONNECTION
+        db.close();
+    }
+
 }
 
