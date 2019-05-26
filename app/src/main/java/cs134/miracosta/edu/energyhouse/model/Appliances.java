@@ -10,10 +10,11 @@ public class Appliances {
     private double mHours;
     private double mWattHour;
     private double mTotalWH;
+    private double mKiloWattHour;
     private double mKiloWattHourPerWeek;
     private double mKiloWattHourPerMonth;
     private int DAYS_OF_WEEK = 7;
-    private int DAYS_OF_MONTH = 30; //precise number is 30.4167 if you average out number of days in year/12
+    private int DAYS_OF_MONTH = 30; //precise number is 30.4167 if you average out 365/12
 
 
     public Appliances() {
@@ -63,6 +64,10 @@ public class Appliances {
         mTotalWH = total;
     }
 
+    public void setKiloWattHour(double total) {
+        mKiloWattHour = (total/1000);
+    }
+
     public void setEnergyPerWeek(double total){
         mKiloWattHourPerWeek = (total/1000)*DAYS_OF_WEEK;
     }
@@ -93,6 +98,10 @@ public class Appliances {
 
     public double getTotalWH(){
         return mTotalWH;
+    }
+
+    public double getKiloWattHour() {
+        return mKiloWattHour;
     }
 
     public double getEnergyPerWeek(){

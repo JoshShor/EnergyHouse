@@ -3,7 +3,6 @@ package cs134.miracosta.edu.energyhouse;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +10,8 @@ import android.widget.EditText;
 import cs134.miracosta.edu.energyhouse.model.Appliances;
 
 public class ApplianceActivity extends AppCompatActivity {
+
+    //I should've used an array for all of this
     private EditText ledPowerEditText;
     private EditText ledHoursEditText;
     private EditText tvPowerEditText;
@@ -33,24 +34,11 @@ public class ApplianceActivity extends AppCompatActivity {
     private EditText dryerHoursEditText;
     private Button energyUsageCalcButton;
 
-    double wats = 0;
-    double hrs = 0;
-    double wattHour = 0;
     double totalEnergy = 0;
-    double weekEnergy;
-    double monthEnergy;
+    double daysKiloWattHour = 0;
+    double weeklyEnergy = 0;
+    double monthEnergy = 0;
 
-    //This would be much better if I used an array.
-    double lightNRG;
-    double tvNRG;
-    double acNRG;
-    double heatNRG;
-    double microwaveNRG;
-    double ovenNRG;
-    double fridgeNRG;
-    double dishNRG;
-    double washNRG;
-    double dryerNRG;
 
     private Appliances appliance;
 
@@ -81,6 +69,7 @@ public class ApplianceActivity extends AppCompatActivity {
         energyUsageCalcButton = findViewById(R.id.energyUsageCalcButton);
 
         appliance = new Appliances();
+        setEditTextDefaults();
 
     }
 
@@ -111,9 +100,6 @@ public class ApplianceActivity extends AppCompatActivity {
         appliance.setHours(Double.parseDouble(lightHoursStr));
         appliance.setWattHour(Double.parseDouble(lightPowerStr), Double.parseDouble(lightHoursStr));
         totalEnergy += appliance.getWattHour();
-        //Log.e("Lights outs", "Lights here " + totalEnergy);
-        //Log.e("Lights outs", lightPowerStr);
-
         appliance.setWatts(Double.parseDouble(tvPowerStr));
         appliance.setHours(Double.parseDouble(tvHoursStr));
         appliance.setWattHour(Double.parseDouble(tvPowerStr), Double.parseDouble(tvHoursStr));
@@ -159,42 +145,79 @@ public class ApplianceActivity extends AppCompatActivity {
         appliance.setWattHour(Double.parseDouble(dryerPowerStr), Double.parseDouble(dryerHoursStr));
         totalEnergy += appliance.getWattHour();
 
-        appliance.setTotalWH(totalEnergy);
-        double total = appliance.getTotalWH();
-        appliance.setEnergyPerWeek(total);
-        weekEnergy = appliance.getEnergyPerWeek();
-        appliance.setEnergyPerMonth(total);
+        appliance.setKiloWattHour(totalEnergy);
+        daysKiloWattHour = appliance.getKiloWattHour();
+        appliance.setEnergyPerWeek(totalEnergy);
+        weeklyEnergy = appliance.getEnergyPerWeek();
+        appliance.setEnergyPerMonth(totalEnergy);
         monthEnergy = appliance.getEnergyPerMonth();
 
         //create new intent to share data between activities and switch to them
-        Intent estimateIntent = new Intent(this, PowerEstimate.class);
+        Intent estimateIntent = new Intent(this, PowerEstimateActivity.class);
 
-        String dailyEnergyUseString = (totalEnergy) + " wattHours/Day";
-        String weeklyEnergyUseString = weekEnergy + " kWh/week";
+        String dailyEnergyUseString = (totalEnergy) + " Wh/Day";
+        String weeklyEnergyUseString = weeklyEnergy + " kWh/week";
         String monthlyEnergyUseString = monthEnergy + " kWh/month";
 
         estimateIntent.putExtra("DailyNRG", dailyEnergyUseString);
         estimateIntent.putExtra("WeeklyNRG", weeklyEnergyUseString);
         estimateIntent.putExtra("MonthlyNRG", monthlyEnergyUseString);
+        estimateIntent.putExtra("DayKiloNRG", Double.toString(daysKiloWattHour));
 
         startActivity(estimateIntent);
 
+    }
 
+    private void setEditTextDefaults(){
+        /**/
+        //default wattage
+        ledPowerEditText.setText("60");
+        tvPowerEditText.setText("140");
+        acPowerEditText.setText("4000");
+        heaterPowerEditText.setText("1500");
+        microwavePowerEditText.setText("700");
+        ovenPowerEditText.setText("3750");
+        refrigeratorPowerEditText.setText("780");
+        dishwasherPowerEditText.setText("1800");
+        washingMachinePowerEditText.setText("700");
+        dryerPowerEditText.setText("3000");
 
-        /*
-        lightNRG = (Double.parseDouble(lightPowerStr) * Double.parseDouble(lightHoursStr));
-        tvNRG = (Double.parseDouble(tvPowerStr) * Double.parseDouble(tvHoursStr));
-        acNRG = (Double.parseDouble(acPowerStr) * Double.parseDouble(acHoursStr));
-        heatNRG = (Double.parseDouble(heaterPowerStr) * Double.parseDouble(heaterHoursStr));
-        microwaveNRG = (Double.parseDouble(microwavePowerStr) * Double.parseDouble(microwaveHoursStr));
-        ovenNRG = (Double.parseDouble(ovenPowerStr) * Double.parseDouble(ovenHoursStr));
-        fridgeNRG = (Double.parseDouble(refrigeratorPowerStr) * Double.parseDouble(refrigeratorHoursStr));
-        dishNRG = (Double.parseDouble(dishwasherPowerStr) * Double.parseDouble(dishwasherHoursStr));
-        washNRG = (Double.parseDouble(washingMachinePowerStr) * Double.parseDouble(washingMachineHoursStr));
-        dryerNRG = (Double.parseDouble(dryerPowerStr) * Double.parseDouble(dryerHoursStr));
-        */
+        //default hours
+        ledHoursEditText.setText("11");
+        tvHoursEditText.setText("5");
+        acHoursEditText.setText("9.5");
+        heaterHoursEditText.setText("9.4");
+        microwaveHoursEditText.setText("0.25");
+        ovenHoursEditText.setText("4");
+        refrigeratorHoursEditText.setText("24");
+        dishwasherHoursEditText.setText("3");
+        washingMachineHoursEditText.setText("1");
+        dryerHoursEditText.setText("1");
+        /*/
+        /*====Just for testing purposes====
+        ledPowerEditText.setText("1");
+        tvPowerEditText.setText("1");
+        acPowerEditText.setText("1");
+        heaterPowerEditText.setText("1");
+        microwavePowerEditText.setText("1");
+        ovenPowerEditText.setText("1");
+        refrigeratorPowerEditText.setText("1");
+        dishwasherPowerEditText.setText("1");
+        washingMachinePowerEditText.setText("1");
+        dryerPowerEditText.setText("1");
 
+        //default hours
+        ledHoursEditText.setText("1");
+        tvHoursEditText.setText("1");
+        acHoursEditText.setText("1");
+        heaterHoursEditText.setText("1");
+        microwaveHoursEditText.setText("1");
+        ovenHoursEditText.setText("1");
+        refrigeratorHoursEditText.setText("1");
+        dishwasherHoursEditText.setText("1");
+        washingMachineHoursEditText.setText("1");
+        dryerHoursEditText.setText("1");
 
-
+         */
     }
 }

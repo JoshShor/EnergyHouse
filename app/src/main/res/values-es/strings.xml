@@ -32,7 +32,7 @@
     <string name="applianceKitchenMicrowave">Microonda</string>
     <string name="applianceKitchenOven">Horno</string>
     <string name="applianceKitchenRefrigerator">Refrigerador</string>
-    <string name="suggestedAppliancesLbl">Electrodomésticos sugeridos</string>
+    <string name="addWattageButtonText">agregar vatios</string>
     <string name="applianceKitchenDishwasher">Lavavajillas</string>
     <string name="applianceWashingMachine">Lavadora</string>
     <string name="applianceDryer">Secadora</string>
