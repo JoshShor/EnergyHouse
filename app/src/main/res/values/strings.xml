@@ -21,7 +21,7 @@
     <string name="goToCalcEnergy">Calculate Home Appliance Energy Usage</string>
     <string name="goToSolarEst">Calculate Estimate for Solar Energy</string>
     <string name="logoShake">Shake Picture</string>
-    <string name="suggestedAppliancesLbl">Suggested Appliances</string>
+    <string name="addWattageButtonText">Add to wattage log</string>
     <!-- Home appliances -->
     <string name="applianceLight">light bulbs</string>
     <string name="applianceTV">Television</string>

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PowerEstimate">
+    tools:context=".PowerEstimateActivity"
+    android:background="@drawable/plug">>
 
     <TextView
         android:id="@+id/textView"
@@ -98,22 +99,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/perMonthText" />
 
-    <TextView
-        android:id="@+id/suggestApplLabel"
+    <Button
+        android:id="@+id/addWattageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/suggestedAppliancesLbl"
+        android:background="@drawable/greenbutton"
+        android:onClick="addToUsageLog"
+        android:text="@string/addWattageButtonText"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/energyMonthlyTextView" />
 
     <ListView
+        android:id="@+id/usageListView"
         android:layout_width="395dp"
-        android:layout_height="269dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="326dp" />
+        android:layout_height="240dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button3" />
 
 </android.support.constraint.ConstraintLayout>

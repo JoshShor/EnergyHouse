@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ApplianceActivity"></activity>
-        <activity android:name=".PowerEstimate" />
+        <activity android:name=".PowerEstimateActivity" />
         <activity android:name=".SolarActivity" />
         <!-- Dennis's Activities -->
         <activity android:name=".RecyclingActivity" />

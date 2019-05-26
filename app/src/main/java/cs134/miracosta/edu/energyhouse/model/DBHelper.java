@@ -32,7 +32,6 @@ public class DBHelper extends SQLiteOpenHelper {
     //End Dennis's Table**********************************************************
 
     private static final String SOLAR_TABLE = "Solar";
-    private static final String APPLIANCE_TABLE = "Appliances";
   //TASK: DEFINE THE FIELDS (COLUMN NAMES) FOR THE SOLAR TABLE
     private static final String SOLAR_KEY_FIELD_ID = "_id";
     private static final String SOLAR_PANEL_NAME = "panel";
@@ -40,11 +39,18 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String SOLAR_PANEL_WATTAGE = "watts";
     private static final String SOLAR_PANEL_SQFT = "SqFootage";
 
-    private static final String APPLIANCE_ID = "_id";
+    private static final String APPLIANCE_TABLE = "ApplianceList";
+    private static final String APPLIANCE_KEY_FIELD_ID = "_id";
     private static final String APPLIANCE_NAME = "name";
     private static final String APPLIANCE_COST = "costs";
     private static final String APPLIANCE_WATTAGE = "watts";
     private static final String APPLIANCE_AVAILAILBITY = "whereToBuy";
+
+    private static final String USAGETRACKING_TABLE = "UsageTrackingTable";
+    private static final String USAGETRACKING_KEY_FIELD_ID = "_id";
+    private static final String USAGETRACKING_DAY = "day";
+    private static final String USAGETRACKING_TIME = "time";
+    private static final String USAGETRACKING_WATTS = "watts";
 
     //Dennis's Fields**********************************************************
     private static final String KEY_IMPACT_FIELD_ID = "_id";
@@ -149,13 +155,19 @@ public class DBHelper extends SQLiteOpenHelper {
 
         //Creation of the table for Appliances
         createQuery = "CREATE TABLE IF NOT EXISTS " + APPLIANCE_TABLE + "("
-                + APPLIANCE_ID + " INTEGER PRIMARY KEY, "
+                + APPLIANCE_KEY_FIELD_ID + " INTEGER PRIMARY KEY, "
                 + APPLIANCE_NAME + " TEXT, "
                 + APPLIANCE_COST + " TEXT, "
                 + APPLIANCE_WATTAGE + " TEXT, "
                 + APPLIANCE_AVAILAILBITY + " TEXT" + ")";
         database.execSQL(createQuery);
 
+        createQuery = "CREATE TABLE IF NOT EXISTS " + USAGETRACKING_TABLE + "("
+                + USAGETRACKING_KEY_FIELD_ID + " INTEGER PRIMARY KEY, "
+                + USAGETRACKING_DAY + " TEXT, "
+                + USAGETRACKING_TIME + " TEXT, "
+                + USAGETRACKING_WATTS + " TEXT" + ")";
+        database.execSQL(createQuery);
     }
 
     /**
@@ -177,6 +189,8 @@ public class DBHelper extends SQLiteOpenHelper {
         database.execSQL("DROP TABLE IF EXISTS " + RECYCLING_LOCATIONS_TABLE);
         //End Dennis's Table onUpgrade**********************************************************
         database.execSQL("DROP TABLE IF EXISTS " + SOLAR_TABLE);
+        database.execSQL("DROP TABLE IF EXISTS " + APPLIANCE_TABLE);
+        database.execSQL("DROP TABLE IF EXISTS " + USAGETRACKING_TABLE);
 
         onCreate(database);
     }
@@ -709,6 +723,266 @@ public class DBHelper extends SQLiteOpenHelper {
                 double watts = Double.parseDouble(fields[3].trim());
                 double sqft = Double.parseDouble(fields[4].trim());
                 addSolarPanels(new SolarPanels(id, name, costs, watts, sqft));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    //UsageTracker
+
+    /**
+     * Adds item in usagetracking database
+     * @param entry
+     */
+    public void addUsageLog(UsageTracker entry){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(USAGETRACKING_DAY, entry.getDayStr());
+        values.put(USAGETRACKING_TIME, entry.getTimeStr());
+        values.put(USAGETRACKING_WATTS, entry.getWattsUsed());
+
+        long id = db.insert(USAGETRACKING_TABLE, null,values);
+        entry.setId(id);
+
+        //close the database
+        db.close();
+    }
+
+    /**
+     * Gets all the usage information from the database
+     * @return a List of the usage info
+     */
+    public List<UsageTracker> getAllUsageLogs() {
+        List<UsageTracker> usageLog = new ArrayList<>();
+        SQLiteDatabase database = getReadableDatabase();
+        // A cursor is the results of a database query (what gets returned)
+        Cursor cursor = database.query(
+                USAGETRACKING_TABLE,
+                new String[]{USAGETRACKING_KEY_FIELD_ID, USAGETRACKING_DAY, USAGETRACKING_TIME, USAGETRACKING_WATTS},
+                null,
+                null,
+                null, null, null, null);
+
+        //COLLECT EACH ROW IN THE TABLE
+        if (cursor.moveToFirst()) {
+            do {
+                UsageTracker entry =
+                        new UsageTracker(cursor.getLong(0),
+                                cursor.getString(1),
+                                cursor.getString(2),
+                                cursor.getDouble(3));
+
+                usageLog.add(entry);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        database.close();
+        return usageLog;
+    }
+
+    /**
+     * Delete entry in the database
+     * @param entry
+     */
+    public void deleteUsageTracker(UsageTracker entry) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        // DELETE THE TABLE ROW
+        db.delete(USAGETRACKING_TABLE, USAGETRACKING_KEY_FIELD_ID + " = ?",
+                new String[]{String.valueOf(entry.getId())});
+        db.close();
+    }
+
+    /**
+     * deletes all the info in the database
+     */
+    public void deleteAllUsageTrackers() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(USAGETRACKING_TABLE, null, null);
+        db.close();
+    }
+
+    /**
+     * Updates usage of Data in the database
+     * @param entry
+     */
+    public void updateUsageTracker(UsageTracker entry) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(USAGETRACKING_DAY, entry.getDayStr());
+        values.put(USAGETRACKING_TIME, entry.getTimeStr());
+        values.put(USAGETRACKING_WATTS, entry.getWattsUsed());
+
+        db.update(USAGETRACKING_TABLE, values, USAGETRACKING_KEY_FIELD_ID + " = ?",
+                new String[]{String.valueOf(entry.getId())});
+        db.close();
+    }
+
+    /**
+     * Gets tracked info from database
+     * @param id
+     * @return entry
+     */
+    public UsageTracker getUsageTracker(int id) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(
+                USAGETRACKING_TABLE,
+                new String[]{USAGETRACKING_KEY_FIELD_ID, USAGETRACKING_DAY, USAGETRACKING_TIME, USAGETRACKING_WATTS},
+                USAGETRACKING_KEY_FIELD_ID + "=?",
+                new String[]{String.valueOf(id)},
+                null, null, null, null);
+
+        UsageTracker entry = null;
+        if (cursor != null) {
+            cursor.moveToFirst();
+
+            String uriString = cursor.getString(4);
+            Uri uri = Uri.parse(uriString);
+
+            entry = new UsageTracker(
+                    cursor.getLong(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getDouble(3));
+
+            cursor.close();
+        }
+        db.close();
+        return entry;
+    }
+
+    //APPLIANCELISTS
+    /**
+     * Add Appliances to the database
+     * @param appliances
+     */
+    public void addApplianceList(ApplianceList appliances) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(APPLIANCE_NAME, appliances.getName());
+        values.put(APPLIANCE_WATTAGE, appliances.getWattUsed());
+        values.put(APPLIANCE_COST, appliances.getPrice());
+        values.put(APPLIANCE_AVAILAILBITY, appliances.getInfo());
+
+        long id = db.insert(APPLIANCE_TABLE, null, values);
+        appliances.setId(id);
+        // CLOSE THE DATABASE CONNECTION
+        db.close();
+    }
+    public List<ApplianceList> getAllApplianceList() {
+        ArrayList<ApplianceList> applianceList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                APPLIANCE_TABLE,
+                new String[]{APPLIANCE_KEY_FIELD_ID, APPLIANCE_NAME,
+                        APPLIANCE_WATTAGE, APPLIANCE_COST, APPLIANCE_AVAILAILBITY},
+                null,
+                null,
+                null, null, null, null);
+
+        //COLLECT EACH ROW IN THE TABLE
+        if (cursor.moveToFirst()) {
+            do {
+                ApplianceList appliances =
+                        new ApplianceList(cursor.getLong(0),
+                                cursor.getString(1),
+                                cursor.getDouble(2),
+                                cursor.getDouble(3),
+                                cursor.getString(4));
+                applianceList.add(appliances);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return applianceList;
+    }
+    /**
+     * Delete an Appliance in the db
+     *
+     * @param panels the recycling location to delete
+     */
+    public void deleteApplianceList(ApplianceList panels) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // DELETE THE TABLE ROW
+        db.delete(APPLIANCE_TABLE, APPLIANCE_KEY_FIELD_ID + " = ?",
+                new String[]{String.valueOf(panels.getId())});
+        db.close();
+    }
+    /**
+     * Delete all appliances in the db
+     */
+    public void deleteAllApplianceList() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(APPLIANCE_TABLE, null, null);
+        db.close();
+    }
+    /**
+     * Get a ApplianceList from the db
+     *
+     * @param id the id of the ApplianceList
+     * @return appliances
+     */
+    public ApplianceList getApplianceList(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                APPLIANCE_TABLE,
+                new String[]{APPLIANCE_KEY_FIELD_ID, APPLIANCE_NAME,
+                        APPLIANCE_WATTAGE, APPLIANCE_COST, APPLIANCE_AVAILAILBITY},
+                APPLIANCE_KEY_FIELD_ID + "=?",
+                new String[]{String.valueOf(id)},
+                null, null, null, null);
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        ApplianceList appliances =
+                new ApplianceList(cursor.getLong(0),
+                        cursor.getString(1),
+                        cursor.getDouble(2),
+                        cursor.getDouble(3),
+                        cursor.getString(4));
+        cursor.close();
+        db.close();
+        return appliances;
+    }
+    /**
+     * Imports solarpanel data from CSV into the db
+     *
+     * @param csvFileName the csv file name
+     * @return whether or not the operation was successful
+     */
+    public boolean importApplianceListFromCSV(String csvFileName) {
+        AssetManager manager = mContext.getAssets();
+        InputStream inStream;
+        try {
+            inStream = manager.open(csvFileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        BufferedReader buffer = new BufferedReader(new InputStreamReader(inStream));
+        String line;
+        try {
+            while ((line = buffer.readLine()) != null) {
+                String[] fields = line.split(",");
+                if (fields.length != 9) {
+                    Log.d("AppliancesList", "Skipping Bad CSV Row: " + Arrays.toString(fields));
+                    continue;
+                }
+                long id = Long.parseLong(fields[0].trim());
+                String name = fields[1].trim();
+                double wattsUsed = Double.parseDouble(fields[2].trim());
+                double price = Double.parseDouble(fields[3].trim());
+                String into = fields[4].trim();;
+                addApplianceList(new ApplianceList(id, name, wattsUsed, price, into));
             }
         } catch (IOException e) {
             e.printStackTrace();
