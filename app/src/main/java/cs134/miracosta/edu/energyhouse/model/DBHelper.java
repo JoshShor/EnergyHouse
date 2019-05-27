@@ -31,20 +31,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String RECYCLING_LOCATIONS_TABLE = "Recycling_Locations";
     //End Dennis's Table**********************************************************
 
-    private static final String SOLAR_TABLE = "Solar";
-  //TASK: DEFINE THE FIELDS (COLUMN NAMES) FOR THE SOLAR TABLE
-    private static final String SOLAR_KEY_FIELD_ID = "_id";
-    private static final String SOLAR_PANEL_NAME = "panel";
-    private static final String SOLAR_PANEL_COST = "costs";
-    private static final String SOLAR_PANEL_WATTAGE = "watts";
-    private static final String SOLAR_PANEL_SQFT = "SqFootage";
-
-    private static final String APPLIANCE_TABLE = "ApplianceList";
-    private static final String APPLIANCE_KEY_FIELD_ID = "_id";
-    private static final String APPLIANCE_NAME = "name";
-    private static final String APPLIANCE_COST = "costs";
-    private static final String APPLIANCE_WATTAGE = "watts";
-    private static final String APPLIANCE_AVAILAILBITY = "whereToBuy";
+  //TASK: DEFINE THE FIELDS (COLUMN NAMES) FOR THE ENERGY HOUSE TABLES
 
     private static final String USAGETRACKING_TABLE = "UsageTrackingTable";
     private static final String USAGETRACKING_KEY_FIELD_ID = "_id";
@@ -87,7 +74,6 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String FIELD_ZIP_CODE = "zip_code";
     private static final String FIELD_LATITUDE = "latitude";
     private static final String FIELD_LONGITUDE = "longitude";
-
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -144,23 +130,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         //End Dennis's Table onCreate**********************************************************
 
-        //Creation of the table for solar panels
-        createQuery = "CREATE TABLE IF NOT EXISTS " + SOLAR_TABLE + "("
-                + SOLAR_KEY_FIELD_ID + " INTEGER PRIMARY KEY, "
-                + SOLAR_PANEL_NAME + " TEXT, "
-                + SOLAR_PANEL_COST + " DOUBLE, "
-                + SOLAR_PANEL_WATTAGE + " DOUBLE, "
-                + SOLAR_PANEL_SQFT + " DOUBLE" + ")";
-        database.execSQL(createQuery);
 
-        //Creation of the table for Appliances
-        createQuery = "CREATE TABLE IF NOT EXISTS " + APPLIANCE_TABLE + "("
-                + APPLIANCE_KEY_FIELD_ID + " INTEGER PRIMARY KEY, "
-                + APPLIANCE_NAME + " TEXT, "
-                + APPLIANCE_COST + " TEXT, "
-                + APPLIANCE_WATTAGE + " TEXT, "
-                + APPLIANCE_AVAILAILBITY + " TEXT" + ")";
-        database.execSQL(createQuery);
 
         createQuery = "CREATE TABLE IF NOT EXISTS " + USAGETRACKING_TABLE + "("
                 + USAGETRACKING_KEY_FIELD_ID + " INTEGER PRIMARY KEY, "
@@ -188,8 +158,6 @@ public class DBHelper extends SQLiteOpenHelper {
         database.execSQL("DROP TABLE IF EXISTS " + IMPACT_TABLE);
         database.execSQL("DROP TABLE IF EXISTS " + RECYCLING_LOCATIONS_TABLE);
         //End Dennis's Table onUpgrade**********************************************************
-        database.execSQL("DROP TABLE IF EXISTS " + SOLAR_TABLE);
-        database.execSQL("DROP TABLE IF EXISTS " + APPLIANCE_TABLE);
         database.execSQL("DROP TABLE IF EXISTS " + USAGETRACKING_TABLE);
 
         onCreate(database);
@@ -597,139 +565,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //End Dennis's DBHelper methods**********************************************************
 
-    /**
-     * Add solar panels to the database
-     * @param panels
-     */
-    public void addSolarPanels(SolarPanels panels) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-
-        values.put(SOLAR_PANEL_NAME, panels.getName());
-        values.put(SOLAR_PANEL_COST, panels.getCosts());
-        values.put(SOLAR_PANEL_WATTAGE, panels.getWatts());
-        values.put(SOLAR_PANEL_SQFT, panels.getSqft());
-
-        long id = db.insert(SOLAR_TABLE, null, values);
-        panels.setId(id);
-        // CLOSE THE DATABASE CONNECTION
-        db.close();
-    }
-    public List<SolarPanels> getAllSolarPanels() {
-        ArrayList<SolarPanels> panelList = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(
-                SOLAR_TABLE,
-                new String[]{SOLAR_KEY_FIELD_ID, SOLAR_PANEL_NAME,
-                        SOLAR_PANEL_COST, SOLAR_PANEL_WATTAGE, SOLAR_PANEL_SQFT},
-                null,
-                null,
-                null, null, null, null);
-
-        //COLLECT EACH ROW IN THE TABLE
-        if (cursor.moveToFirst()) {
-            do {
-                SolarPanels panel =
-                        new SolarPanels(cursor.getLong(0),
-                                cursor.getString(1),
-                                cursor.getDouble(2),
-                                cursor.getDouble(3),
-                                cursor.getDouble(4));
-                panelList.add(panel);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        db.close();
-        return panelList;
-    }
-    /**
-     * Delete a recycling location in the db
-     *
-     * @param panels the recycling location to delete
-     */
-    public void deleteSolarPanels(SolarPanels panels) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        // DELETE THE TABLE ROW
-        db.delete(SOLAR_TABLE, SOLAR_KEY_FIELD_ID + " = ?",
-                new String[]{String.valueOf(panels.getId())});
-        db.close();
-    }
-    /**
-     * Delete all panels in the db
-     */
-    public void deleteAllSolarPanels() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(SOLAR_TABLE, null, null);
-        db.close();
-    }
-    /**
-     * Get a solarpanels from the db
-     *
-     * @param id the id of the recycling location
-     * @return solar panels
-     */
-    public SolarPanels getSolarPanels(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(
-                SOLAR_TABLE,
-                new String[]{SOLAR_KEY_FIELD_ID, SOLAR_PANEL_NAME,
-                        SOLAR_PANEL_COST, SOLAR_PANEL_WATTAGE, SOLAR_PANEL_SQFT},
-                SOLAR_KEY_FIELD_ID + "=?",
-                new String[]{String.valueOf(id)},
-                null, null, null, null);
-
-        if (cursor != null)
-            cursor.moveToFirst();
-
-        SolarPanels panels =
-                new SolarPanels(cursor.getLong(0),
-                        cursor.getString(1),
-                        cursor.getDouble(2),
-                        cursor.getDouble(3),
-                        cursor.getDouble(4));
-        cursor.close();
-        db.close();
-        return panels;
-    }
-    /**
-     * Imports solarpanel data from CSV into the db
-     *
-     * @param csvFileName the csv file name
-     * @return whether or not the operation was successful
-     */
-    public boolean importSolarPanelsFromCSV(String csvFileName) {
-        AssetManager manager = mContext.getAssets();
-        InputStream inStream;
-        try {
-            inStream = manager.open(csvFileName);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-
-        BufferedReader buffer = new BufferedReader(new InputStreamReader(inStream));
-        String line;
-        try {
-            while ((line = buffer.readLine()) != null) {
-                String[] fields = line.split(",");
-                if (fields.length != 9) {
-                    Log.d("Solar Panels", "Skipping Bad CSV Row: " + Arrays.toString(fields));
-                    continue;
-                }
-                long id = Long.parseLong(fields[0].trim());
-                String name = fields[1].trim();
-                double costs = Double.parseDouble(fields[2].trim());
-                double watts = Double.parseDouble(fields[3].trim());
-                double sqft = Double.parseDouble(fields[4].trim());
-                addSolarPanels(new SolarPanels(id, name, costs, watts, sqft));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
 
     //UsageTracker
 
@@ -800,7 +635,7 @@ public class DBHelper extends SQLiteOpenHelper {
     /**
      * deletes all the info in the database
      */
-    public void deleteAllUsageTrackers() {
+    public void deleteAllUsageLogs() {
         SQLiteDatabase db = getWritableDatabase();
         db.delete(USAGETRACKING_TABLE, null, null);
         db.close();
@@ -854,140 +689,5 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         db.close();
         return entry;
-    }
-
-    //APPLIANCELISTS
-    /**
-     * Add Appliances to the database
-     * @param appliances
-     */
-    public void addApplianceList(ApplianceList appliances) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-
-        values.put(APPLIANCE_NAME, appliances.getName());
-        values.put(APPLIANCE_WATTAGE, appliances.getWattUsed());
-        values.put(APPLIANCE_COST, appliances.getPrice());
-        values.put(APPLIANCE_AVAILAILBITY, appliances.getInfo());
-
-        long id = db.insert(APPLIANCE_TABLE, null, values);
-        appliances.setId(id);
-        // CLOSE THE DATABASE CONNECTION
-        db.close();
-    }
-    public List<ApplianceList> getAllApplianceList() {
-        ArrayList<ApplianceList> applianceList = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(
-                APPLIANCE_TABLE,
-                new String[]{APPLIANCE_KEY_FIELD_ID, APPLIANCE_NAME,
-                        APPLIANCE_WATTAGE, APPLIANCE_COST, APPLIANCE_AVAILAILBITY},
-                null,
-                null,
-                null, null, null, null);
-
-        //COLLECT EACH ROW IN THE TABLE
-        if (cursor.moveToFirst()) {
-            do {
-                ApplianceList appliances =
-                        new ApplianceList(cursor.getLong(0),
-                                cursor.getString(1),
-                                cursor.getDouble(2),
-                                cursor.getDouble(3),
-                                cursor.getString(4));
-                applianceList.add(appliances);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        db.close();
-        return applianceList;
-    }
-    /**
-     * Delete an Appliance in the db
-     *
-     * @param panels the recycling location to delete
-     */
-    public void deleteApplianceList(ApplianceList panels) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        // DELETE THE TABLE ROW
-        db.delete(APPLIANCE_TABLE, APPLIANCE_KEY_FIELD_ID + " = ?",
-                new String[]{String.valueOf(panels.getId())});
-        db.close();
-    }
-    /**
-     * Delete all appliances in the db
-     */
-    public void deleteAllApplianceList() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(APPLIANCE_TABLE, null, null);
-        db.close();
-    }
-    /**
-     * Get a ApplianceList from the db
-     *
-     * @param id the id of the ApplianceList
-     * @return appliances
-     */
-    public ApplianceList getApplianceList(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(
-                APPLIANCE_TABLE,
-                new String[]{APPLIANCE_KEY_FIELD_ID, APPLIANCE_NAME,
-                        APPLIANCE_WATTAGE, APPLIANCE_COST, APPLIANCE_AVAILAILBITY},
-                APPLIANCE_KEY_FIELD_ID + "=?",
-                new String[]{String.valueOf(id)},
-                null, null, null, null);
-
-        if (cursor != null)
-            cursor.moveToFirst();
-
-        ApplianceList appliances =
-                new ApplianceList(cursor.getLong(0),
-                        cursor.getString(1),
-                        cursor.getDouble(2),
-                        cursor.getDouble(3),
-                        cursor.getString(4));
-        cursor.close();
-        db.close();
-        return appliances;
-    }
-    /**
-     * Imports solarpanel data from CSV into the db
-     *
-     * @param csvFileName the csv file name
-     * @return whether or not the operation was successful
-     */
-    public boolean importApplianceListFromCSV(String csvFileName) {
-        AssetManager manager = mContext.getAssets();
-        InputStream inStream;
-        try {
-            inStream = manager.open(csvFileName);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-
-        BufferedReader buffer = new BufferedReader(new InputStreamReader(inStream));
-        String line;
-        try {
-            while ((line = buffer.readLine()) != null) {
-                String[] fields = line.split(",");
-                if (fields.length != 9) {
-                    Log.d("AppliancesList", "Skipping Bad CSV Row: " + Arrays.toString(fields));
-                    continue;
-                }
-                long id = Long.parseLong(fields[0].trim());
-                String name = fields[1].trim();
-                double wattsUsed = Double.parseDouble(fields[2].trim());
-                double price = Double.parseDouble(fields[3].trim());
-                String into = fields[4].trim();;
-                addApplianceList(new ApplianceList(id, name, wattsUsed, price, into));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
     }
 }

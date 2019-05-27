@@ -9,7 +9,7 @@
     android:background="@drawable/energyactivitybg">
 
     <TextView
-        android:id="@+id/titleTextView"
+        android:id="@+id/solarActivityTitleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/mainmenu"

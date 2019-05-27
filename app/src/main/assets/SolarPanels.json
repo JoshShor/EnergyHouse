@@ -1,0 +1,41 @@
+{
+	"SolarPanels":
+	[
+		{
+			"Panel": "REC Solar REC260PE(Polycrystylline)",
+			"Cost": "288",
+			"WattsPerPanel": "260",
+			"SquareFeet": "17.76"
+		},
+		{
+			"Panel": "LG Module LG280S1C-B3(Monocrystylline)",
+			"Cost": "336",
+			"WattsPerPanel": "280",
+			"SquareFeet": "17.65"
+		},
+		{
+			"Panel": "SunTech STP(Monocrystylline)",
+			"Cost": "256",
+			"WattsPerPanel": "265",
+			"SquareFeet": "17.54"
+		},
+		{
+			"Panel": "PowerFLEXThinFilm",
+			"Cost": "1500",
+			"WattsPerPanel": "500",
+			"SquareFeet": "0.13"
+		},
+		{
+			"Panel": "Yingli(Polycrystylline)",
+			"Cost": "183",
+			"WattsPerPanel": "260",
+			"SquareFeet": "20.91"
+		},
+		{
+			"Panel": "Solaria(Monocrystylline)",
+			"Cost": "529",
+			"WattsPerPanel": "355",
+			"SquareFeet": "19.47"
+		}
+	]
+}

@@ -3,7 +3,12 @@ package cs134.miracosta.edu.energyhouse.model;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-
+/**
+ * DBHelperTest.java - Tests the DBHelperTest class
+ *
+ * @author Joshua Shor, Dennis La, Brian Chavez
+ * @version 1.0
+ */
 public class DBHelperTest {
 
     @Test
@@ -77,4 +82,41 @@ public class DBHelperTest {
     @Test
     public void importRecyclingLocationsFromCSV() {
     }
+    /**
+     * Tests addUsageLog method
+     */
+    @Test
+    public void addUsageLog(){
+    }
+    /**
+     * Tests addUsageLog method
+     */
+    @Test
+    public void getAllUsageLogs() {
+    }
+    /**
+     * Tests addUsageLog method
+     */
+    @Test
+    public void deleteUsageTracker() {
+    }
+    /**
+     * Tests addUsageLog method
+     */
+    @Test
+    public void deleteAllUsageLogs() {
+    }
+    /**
+     * Tests addUsageLog method
+     */
+    @Test
+    public void updateUsageTracker() {
+    }
+    /**
+     * Tests addUsageLog method
+     */
+    @Test
+    public void getUsageTracker() {
+    }
+
 }

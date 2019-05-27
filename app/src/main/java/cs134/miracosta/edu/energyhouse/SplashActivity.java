@@ -7,6 +7,10 @@ import android.os.Bundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * just a splash screen to introduce the user to the App
+ */
+
 public class SplashActivity extends AppCompatActivity {
 
     @Override
