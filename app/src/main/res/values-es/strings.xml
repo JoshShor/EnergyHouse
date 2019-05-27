@@ -23,7 +23,11 @@
     <string name="mainmenu">CASA DE ENERGÍA Menú Principal</string>
     <string name ="goToCalcEnergy"> Calcular el uso de energía de los electrodomésticos </string>
     <string name="logoShake">Agitar la imagen</string>
-    <string name="solarActivityHeader">Seleccione el tipo de célula solar e ingrese la cantidad de consumo de energía para obtener la estimación</string>
+    <string name="solarActivityHeader">Estimación Solar)</string>
+    <string name="solarPanelSelected">Panel solar:</string>
+    <string name="numOfSolarPanels">Number of Panels</string>
+    <string name="totalAreaSolarPanels">Total de pies cuadrados</string>
+    <string name="costEstSolarPanels">Costo total estimado:</string>
     <string name="applianceLight">bombillas</string>
     <string name="applianceTV">Televisión</string>
     <string name="applianceFan">Fan</string>

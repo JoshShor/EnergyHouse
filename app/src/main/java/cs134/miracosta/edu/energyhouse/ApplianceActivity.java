@@ -7,8 +7,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.text.DecimalFormat;
+
 import cs134.miracosta.edu.energyhouse.model.Appliances;
 
+/**
+ * ApplianceActivity class has the user enter in their daily energy use for each appliance
+ * the result will be outputted to the PowerEstimateActivity class
+ */
 public class ApplianceActivity extends AppCompatActivity {
 
     //I should've used an array for all of this
@@ -38,6 +44,8 @@ public class ApplianceActivity extends AppCompatActivity {
     double daysKiloWattHour = 0;
     double weeklyEnergy = 0;
     double monthEnergy = 0;
+
+    DecimalFormat df = new DecimalFormat("0.00");
 
 
     private Appliances appliance;
@@ -73,6 +81,12 @@ public class ApplianceActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Goes through every EditText and captures user input
+     * the input then goes ot the "Appliances.java" model file where it would then
+     * computer the amount of energy the user consumed in kilowatt hours
+     * @param v
+     */
     public void computeEnergyConsumed(View v){
 
         String lightPowerStr = ledPowerEditText.getText().toString();
@@ -155,21 +169,23 @@ public class ApplianceActivity extends AppCompatActivity {
         //create new intent to share data between activities and switch to them
         Intent estimateIntent = new Intent(this, PowerEstimateActivity.class);
 
-        String dailyEnergyUseString = (totalEnergy) + " Wh/Day";
-        String weeklyEnergyUseString = weeklyEnergy + " kWh/week";
-        String monthlyEnergyUseString = monthEnergy + " kWh/month";
+        String dailyEnergyUseString = (df.format(totalEnergy)) + " Wh/Day";
+        String weeklyEnergyUseString = (df.format(weeklyEnergy)) + " kWh/week";
+        String monthlyEnergyUseString = (df.format(monthEnergy ))+ " kWh/month";
 
         estimateIntent.putExtra("DailyNRG", dailyEnergyUseString);
         estimateIntent.putExtra("WeeklyNRG", weeklyEnergyUseString);
         estimateIntent.putExtra("MonthlyNRG", monthlyEnergyUseString);
         estimateIntent.putExtra("DayKiloNRG", Double.toString(daysKiloWattHour));
-
         startActivity(estimateIntent);
 
     }
 
+    /**
+     * A method to place default values in the EditText fields of ApplianceActivity
+     */
     private void setEditTextDefaults(){
-        /**/
+
         //default wattage
         ledPowerEditText.setText("60");
         tvPowerEditText.setText("140");
@@ -193,31 +209,6 @@ public class ApplianceActivity extends AppCompatActivity {
         dishwasherHoursEditText.setText("3");
         washingMachineHoursEditText.setText("1");
         dryerHoursEditText.setText("1");
-        /*/
-        /*====Just for testing purposes====
-        ledPowerEditText.setText("1");
-        tvPowerEditText.setText("1");
-        acPowerEditText.setText("1");
-        heaterPowerEditText.setText("1");
-        microwavePowerEditText.setText("1");
-        ovenPowerEditText.setText("1");
-        refrigeratorPowerEditText.setText("1");
-        dishwasherPowerEditText.setText("1");
-        washingMachinePowerEditText.setText("1");
-        dryerPowerEditText.setText("1");
 
-        //default hours
-        ledHoursEditText.setText("1");
-        tvHoursEditText.setText("1");
-        acHoursEditText.setText("1");
-        heaterHoursEditText.setText("1");
-        microwaveHoursEditText.setText("1");
-        ovenHoursEditText.setText("1");
-        refrigeratorHoursEditText.setText("1");
-        dishwasherHoursEditText.setText("1");
-        washingMachineHoursEditText.setText("1");
-        dryerHoursEditText.setText("1");
-
-         */
     }
 }

@@ -60,6 +60,7 @@
         android:id="@+id/shakeAnimButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/transparent_grn_btn"
         android:onClick="toggleShakeAnim"
         android:text="@string/logoShake" />
 

@@ -13,6 +13,14 @@ import java.util.List;
 
 import cs134.miracosta.edu.energyhouse.model.UsageTracker;
 
+/**
+ * UsageListViewAdapter.java handles all views from "usage_entry_list_item.xml"
+ * it then allows for the list items to be displayed in the PowerEstimateActivity
+ * "usageListView" listview
+ *
+ * @author Joshua Shor
+ * @version 1.0
+ */
 public class UsageListViewAdapter extends ArrayAdapter<UsageTracker> {
 
     private Context mContext;
@@ -27,8 +35,19 @@ public class UsageListViewAdapter extends ArrayAdapter<UsageTracker> {
      */
     public UsageListViewAdapter(Context c, int rId, List<UsageTracker> entries) {
         super(c, rId, entries);
+
+        mContext = c;
+        mResourceID = rId;
+        mUsageTracker = entries;
     }
 
+    /**
+     * Method used to inflate the list item view in "activity_power_estimate.xml"
+     * @param pos
+     * @param convertView
+     * @param parent
+     * @return
+     */
     @Override
     public View getView(int pos, View convertView, ViewGroup parent) {
 
@@ -40,7 +59,7 @@ public class UsageListViewAdapter extends ArrayAdapter<UsageTracker> {
 
         LinearLayout offeringListLinearLayout = view.findViewById(R.id.usageListItem);
 
-        String wattString = (Double.toString(focusedUsageTracker.getWattsUsed()) + " Watt-Hours this day");
+        String wattString = ((focusedUsageTracker.getWattsUsed()) + " KiloWattHours");
 
         TextView dateWattTextView = view.findViewById(R.id.dateWattTextView);
         TextView timeWattTextView = view.findViewById(R.id.timeWattTextView);
@@ -50,6 +69,8 @@ public class UsageListViewAdapter extends ArrayAdapter<UsageTracker> {
         timeWattTextView.setText(focusedUsageTracker.getTimeStr());
         wattThisDayTextView.setText(wattString);
 
+        // Sets the tag, so when user clicks a specific offering, we can respond to that object specifically.
+        offeringListLinearLayout.setTag(focusedUsageTracker);
         return view;
     }
 }

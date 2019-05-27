@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Energy House</string>
-
     <string name="energyButton">Energy</string>
     <string name="recycleButton">Recycling</string>
     <string name="transportButton">Transportation</string>
@@ -10,13 +9,12 @@
     <string name="numberOfApplianceHint">Number of appliances</string>
     <string name="powerConsumptionHint">Power Consumption(Watts)</string>
     <string name="hoursUsedHint">Average daily usage (hours)</string>
-    <string name="roomListHeader">Enter in energy usage estimate for each appliance in building</string>
+    <string name="roomListHeader">Enter in energy usage estimate for each appliance</string>
     <string name="powerEstHeader">Energy Usage Estimate</string>
     <string name="energyConsumedhint">enter amount of energy consumed(kWh)</string>
     <string name="perDay">Per Day</string>
     <string name="perWeek">Per Week</string>
     <string name="perMonth">Per Month</string>
-    <string name="solarActivityHeader">Select Solar cell type and enter amount of energy usage to get estimate</string>
     <string name="mainmenu">Energy House Main Menu</string>
     <string name="goToCalcEnergy">Calculate Home Appliance Energy Usage</string>
     <string name="goToSolarEst">Calculate Estimate for Solar Energy</string>
@@ -34,7 +32,11 @@
     <string name="applianceKitchenDishwasher">Dishwasher</string>
     <string name="applianceWashingMachine">Washing Machine</string>
     <string name="applianceDryer">Dryer</string>
-
+    <string name="solarActivityHeader">Solar Energy Estimate</string>
+    <string name="solarPanelSelected">Solar Panel:</string>
+    <string name="numOfSolarPanels">Number of Panels</string>
+    <string name="totalAreaSolarPanels">Total Square Footage</string>
+    <string name="costEstSolarPanels">Estimated Total Cost:</string>
     <string name="fuel_log">Fill-Up Log</string>
     <string name="date">Date</string>
     <string name="gallons">Gallons</string>
@@ -54,8 +56,6 @@
     <string name="carSelectInstructions">Select a car that you would like to use to compare your transporation savings by switching to a more ecological mode of transporation</string>
     <string name="number_of_gallons">Number of Gallons:</string>
     <string name="total_cost">Total Cost:</string>
-
-
     <!-- Dennis's Strings -->
     <string name="where_to_recycle">Where to recycle?</string>
     <string name="calc_recyclables">Calculate your recyclables</string>

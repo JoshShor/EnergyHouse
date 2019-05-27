@@ -5,7 +5,7 @@ public class UsageTracker {
     long mId;
     String mDayStr;
     String mTimeStr;
-    double mWattsUsed;
+    double mKiloWattsUsed;
 
     /**
      * Empty Constructor so method is an easy call
@@ -17,26 +17,26 @@ public class UsageTracker {
      * @param id
      * @param dayStr
      * @param timeStr
-     * @param wattsUsed
+     * @param kiloWattsUsed
      */
-    public UsageTracker(long id, String dayStr, String timeStr, double wattsUsed) {
+    public UsageTracker(long id, String dayStr, String timeStr, double kiloWattsUsed) {
         mId = id;
         mDayStr = dayStr;
         mTimeStr = timeStr;
-        mWattsUsed = wattsUsed;
+        mKiloWattsUsed = kiloWattsUsed;
     }
 
     /**
      * Instantiates a new Usage Tracked information without unique ID.
      * @param dayStr
      * @param timeStr
-     * @param wattsUsed
+     * @param kiloWattsUsed
      */
-    public UsageTracker(String dayStr, String timeStr, double wattsUsed) {
+    public UsageTracker(String dayStr, String timeStr, double kiloWattsUsed) {
         mId = -1;
         mDayStr = dayStr;
         mTimeStr = timeStr;
-        mWattsUsed = wattsUsed;
+        mKiloWattsUsed = kiloWattsUsed;
     }
 
     /**
@@ -65,10 +65,10 @@ public class UsageTracker {
 
     /**
      * Sets the watts of the Usage Tracked in database.
-     * @param wattsUsed
+     * @param kiloWattsUsed
      */
-    public void setWattsUsed(double wattsUsed) {
-        mWattsUsed = wattsUsed;
+    public void setWattsUsed(double kiloWattsUsed) {
+        mKiloWattsUsed = kiloWattsUsed;
     }
 
     /**
@@ -100,7 +100,7 @@ public class UsageTracker {
      * @return watts used
      */
     public double getWattsUsed() {
-        return mWattsUsed;
+        return mKiloWattsUsed;
     }
 
     /**
@@ -113,7 +113,7 @@ public class UsageTracker {
                 "mId=" + mId +
                 ", mDayStr='" + mDayStr + '\'' +
                 ", mTimeStr='" + mTimeStr + '\'' +
-                ", mWattsUsed=" + mWattsUsed +
+                ", mWattsUsed=" + mKiloWattsUsed +
                 '}';
     }
 }

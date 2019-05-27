@@ -5,6 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/panelsbg"
+    android:paddingLeft="8dp"
+    android:paddingTop="8dp"
+    android:paddingRight="8dp"
+    android:paddingBottom="8dp"
     android:orientation="vertical"
     tools:context=".SolarActivity">
 
@@ -14,21 +18,10 @@
         android:layout_height="wrap_content"
         android:text="@string/solarActivityHeader"
         android:textAlignment="center"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-    <!--
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Spinner
-            android:id="@+id/spinner2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    -->
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:paddingTop="8dp"
+        android:paddingBottom="32dp" />
 
     <EditText
         android:id="@+id/energyForSolarEditText"
@@ -36,47 +29,106 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/energyConsumedhint"
-        android:inputType="numberDecimal" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:inputType="numberDecimal"
+        android:paddingTop="32dp"
+        android:textAlignment="center"
+        android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/solarPanelNumLabelText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="sq footage of panels"
+        android:text="@string/solarPanelSelected"
         android:textAlignment="center"
+        android:textSize="18sp"
+        android:paddingTop="24dp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/squarefootTextView"
+        android:id="@+id/selSolarPanelTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="numberDecimal" />
+        android:textAlignment="center"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textStyle="bold" />
 
-    <Space
+    <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:paddingTop="24dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimaryDark">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/numOfSolarPanels"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/solarPanelTotalAreaLabelText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/totalAreaSolarPanels"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/numOfPanelsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/totalSqFtTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textStyle="bold" />
+        </TableRow>
+
+    </TableLayout>
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/solarPanelCostEstLabelText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="estimated cost"
+        android:text="@string/costEstSolarPanels"
         android:textAlignment="center"
+        android:paddingTop="24dp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/costTextView"
+        android:id="@+id/totalCostTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="numberDecimal" />
+        android:paddingBottom="16dp"
+        android:textAlignment="center"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textStyle="bold" />
 
     <ListView
+        android:id="@+id/solarPanelsListView"
+        android:paddingTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
